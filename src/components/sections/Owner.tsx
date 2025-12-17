@@ -1,79 +1,97 @@
 "use client";
-import { OWNER, SITE_CONFIG } from '@/data/inventory';
-import { Quote, ShieldCheck, Phone, BadgeCheck } from 'lucide-react';
-import { motion } from 'framer-motion';
+
+import { OWNER, SITE_CONFIG } from "@/data/inventory";
+import { ShieldCheck, Phone, BadgeCheck } from "lucide-react";
+import { motion } from "framer-motion";
 
 export function Owner() {
   return (
-    <section className="py-20 md:py-32 bg-slate-950 relative overflow-hidden border-t border-slate-900">
-      
-      <div className="container mx-auto px-4 relative z-10">
-        <div className="max-w-6xl mx-auto bg-slate-900/80 backdrop-blur-sm border border-slate-800 rounded-3xl overflow-hidden shadow-2xl flex flex-col md:flex-row">
-          
-          {/* CONTENT AREA */}
-          <div className="w-full md:w-3/5 p-8 md:p-16 flex flex-col justify-center order-2 md:order-1">
-            {/* On Mobile, this reveals as you scroll down */}
-            <motion.div 
-              initial={{ opacity: 0, x: -20 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true, margin: "-100px" }}
-              transition={{ duration: 0.8 }}
+    <section className="relative py-24 md:py-32 overflow-hidden border-t border-white/5">
+      {/* Background depth */}
+      <div className="absolute inset-0 -z-10 bg-gradient-to-br from-[#0b0f0d] via-[#0f1a16] to-[#050807]" />
+
+      <div className="container mx-auto px-4">
+        <div className="max-w-6xl mx-auto grid md:grid-cols-5 rounded-3xl overflow-hidden border border-white/10 bg-white/5 backdrop-blur-sm shadow-2xl">
+
+          {/* ================= IMAGE (TOP ON MOBILE) ================= */}
+          <div className="order-1 md:order-2 md:col-span-2 relative flex items-end justify-center bg-black/40">
+            {/* Gradient frame */}
+            <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent" />
+
+            <motion.img
+              src={OWNER.image}
+              alt={OWNER.name}
+              initial={{ opacity: 0, scale: 1.05 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              viewport={{ once: true }}
+              transition={{ duration: 1, ease: "easeOut" }}
+              className="relative z-10 w-[85%] md:w-[90%] object-contain drop-shadow-2xl"
+              style={{
+                maskImage:
+                  "linear-gradient(to bottom, black 85%, transparent 100%)",
+              }}
+            />
+
+            {/* Verified Badge */}
+            <div className="absolute top-6 right-6 z-20 bg-black/60 backdrop-blur-md p-2 rounded-lg border border-white/10">
+              <BadgeCheck
+                size={22}
+                className="text-blue-500"
+                fill="currentColor"
+                stroke="white"
+              />
+            </div>
+          </div>
+
+          {/* ================= CONTENT (BOTTOM ON MOBILE) ================= */}
+          <div className="order-2 md:order-1 md:col-span-3 p-10 md:p-16 flex items-center">
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.8, ease: "easeOut" }}
+              className="max-w-xl"
             >
-              <div className="inline-flex items-center gap-3 mb-8 bg-slate-950 border border-slate-800 px-4 py-1.5 rounded-full">
-                <span className="flex h-2 w-2 relative">
-                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
-                  <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
-                </span>
-                <span className="text-emerald-500 font-mono text-[10px] font-bold uppercase tracking-widest">
-                  Proprietor's Guarantee
+              {/* Trust Label */}
+              <div className="inline-flex items-center gap-2 mb-8 px-4 py-2 border border-emerald-400/30 bg-emerald-950/40 rounded-sm">
+                <ShieldCheck size={14} className="text-emerald-400" />
+                <span className="text-xs font-bold uppercase tracking-widest text-emerald-300">
+                  Proprietor’s Assurance
                 </span>
               </div>
 
-              <h2 className="text-3xl md:text-5xl font-black text-white uppercase tracking-tight mb-2">
+              <h2 className="text-3xl md:text-5xl font-black uppercase tracking-tight text-white mb-2">
                 {OWNER.name}
               </h2>
-              <p className="text-slate-500 text-xs font-bold uppercase tracking-[0.3em] mb-10 pb-6 border-b border-slate-800">
+
+              <p className="text-xs uppercase tracking-[0.3em] text-slate-500 font-bold mb-8">
                 {OWNER.role}
               </p>
 
-              <p className="text-slate-300 text-lg md:text-xl leading-relaxed font-serif italic font-light">
-                "{OWNER.message}"
+              <p className="text-slate-300 text-lg md:text-xl leading-relaxed mb-10">
+                {OWNER.message}
               </p>
 
-              {/* Action Area - Buttons light up on scroll reveal */}
-              <div className="mt-10 flex flex-col sm:flex-row gap-5">
-                <div className="flex items-center gap-4 px-5 py-3 rounded-lg border border-slate-800 bg-slate-950/50">
-                   <ShieldCheck className="text-emerald-500" size={20} />
-                   <p className="text-slate-200 font-bold text-sm">Since 2017</p>
+              {/* Assurance CTA */}
+              <div className="flex flex-col sm:flex-row gap-4">
+                <div className="flex items-center gap-3 px-5 py-3 border border-white/10 rounded-lg bg-black/30">
+                  <ShieldCheck size={18} className="text-emerald-400" />
+                  <span className="text-sm font-bold text-slate-200">
+                    Serving Since 2017
+                  </span>
                 </div>
 
-                <a href={`tel:${SITE_CONFIG.phone}`} className="flex items-center gap-4 px-5 py-3 rounded-lg bg-emerald-600 text-white">
-                   <Phone size={18} fill="currentColor" />
-                   <span className="font-bold text-sm uppercase">Call Support</span>
+                <a
+                  href={`tel:${SITE_CONFIG.phone}`}
+                  className="flex items-center justify-center gap-3 px-6 py-3 rounded-lg bg-emerald-600 hover:bg-emerald-500 transition-all shadow-[0_0_25px_rgba(16,185,129,0.4)]"
+                >
+                  <Phone size={18} />
+                  <span className="text-sm font-black uppercase tracking-widest">
+                    Speak Directly
+                  </span>
                 </a>
               </div>
             </motion.div>
-          </div>
-
-          {/* IMAGE AREA */}
-          <div className="w-full md:w-2/5 relative min-h-[400px] bg-slate-950 overflow-hidden flex items-end justify-center order-1 md:order-2">
-            <div className="absolute inset-0 bg-gradient-to-b from-slate-800 via-slate-900 to-slate-950 opacity-100"></div>
-            
-            {/* The Image zooms in slightly when it enters the phone screen */}
-            <motion.img 
-              initial={{ opacity: 0, scale: 1.1, y: 20 }}
-              whileInView={{ opacity: 1, scale: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 1, ease: "easeOut" }}
-              src={OWNER.image} 
-              alt={OWNER.name}
-              className="relative z-10 w-[85%] md:w-[90%] h-auto object-contain drop-shadow-2xl"
-              style={{ maskImage: 'linear-gradient(to bottom, black 80%, transparent 100%)' }}
-            />
-
-            <div className="absolute top-6 right-6 z-20 bg-slate-900/80 backdrop-blur-md p-2 rounded-lg border border-slate-700/50">
-               <BadgeCheck className="text-blue-500" size={24} fill="currentColor" stroke="white" />
-            </div>
           </div>
 
         </div>

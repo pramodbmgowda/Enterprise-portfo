@@ -38,6 +38,13 @@ export const CATEGORIES = [
     image: "/pump.jpeg", // Ensure this file exists in public/
     colSpan: "md:col-span-2",
   },
+  {
+    id: "others",
+    title: "Water Solutions",
+    desc: "Submersible & Diesel Pumps",
+    image: "/pump.jpeg", // Ensure this file exists in public/
+    colSpan: "md:col-span-2",
+  },
 ];
 
 export const SERVICES = [
@@ -72,7 +79,7 @@ export const OWNER = {
   name: "Mr. Purushotham", 
   role: "Proprietor",
   image: "/owner.png", 
-  message: "We don't just sell machines; we build relationships. My personal guarantee to every farmer is genuine quality at honest prices. When you buy from us, you buy with confidence.",
-  experience: "Serving Farmers Since 2017",
+  message: "Farming is a time-bound business. You cannot afford downtime waiting for parts or service. I established this dealership to guarantee that when you buy a machine from us, you aren't just buying metal—you are buying my personal commitment to keep your work running.",
+  experience: "Since 2017",
   signature: "Your Trust, Our Legacy."
 };

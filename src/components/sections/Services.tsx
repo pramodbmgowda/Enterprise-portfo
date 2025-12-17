@@ -1,58 +1,83 @@
 "use client";
-import { SERVICES } from '@/data/inventory';
-import { Wrench, Settings, FileText, Tag, ArrowUpRight } from 'lucide-react';
-import { motion } from 'framer-motion';
+
+import { SERVICES } from "@/data/inventory";
+import { Wrench, Settings, FileText, Tag, ArrowUpRight } from "lucide-react";
+import { motion } from "framer-motion";
 
 export function Services() {
   const getIcon = (iconName: string) => {
     switch (iconName) {
-      case 'tag': return <Tag size={28} strokeWidth={1.5} />;
-      case 'wrench': return <Wrench size={28} strokeWidth={1.5} />;
-      case 'settings': return <Settings size={28} strokeWidth={1.5} />;
-      case 'file': return <FileText size={28} strokeWidth={1.5} />;
-      default: return <Wrench size={28} strokeWidth={1.5} />;
+      case "tag":
+        return <Tag size={26} strokeWidth={1.5} />;
+      case "wrench":
+        return <Wrench size={26} strokeWidth={1.5} />;
+      case "settings":
+        return <Settings size={26} strokeWidth={1.5} />;
+      case "file":
+        return <FileText size={26} strokeWidth={1.5} />;
+      default:
+        return <Wrench size={26} strokeWidth={1.5} />;
     }
   };
 
   return (
-    <section id="features" className="py-24 md:py-32 bg-slate-950 text-white relative border-t border-white/5">
-      <div className="container mx-auto px-4 relative z-10">
-        
+    <section
+      id="features"
+      className="relative py-24 md:py-32 overflow-hidden border-t border-white/5 text-white"
+    >
+      {/* Background depth */}
+      <div className="absolute inset-0 -z-10 bg-gradient-to-br from-[#0b0f0d] via-[#0f1a16] to-[#050807]" />
+
+      <div className="container mx-auto px-4">
+        {/* HEADER */}
         <div className="text-center max-w-3xl mx-auto mb-20">
-          <span className="text-emerald-500 font-extrabold uppercase tracking-[0.2em] text-xs mb-4 block">Why Choose Us</span>
-          <h2 className="text-4xl md:text-6xl font-black uppercase mb-6 tracking-tight">
-            Complete Farming <span className="text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 to-emerald-600">Support</span>
+          <span className="text-emerald-400 font-bold uppercase tracking-[0.25em] text-xs mb-4 block">
+            Why Choose Us
+          </span>
+          <h2 className="text-4xl md:text-6xl font-black uppercase tracking-tight">
+            Complete Farming{" "}
+            <span className="bg-clip-text text-transparent bg-gradient-to-r from-emerald-300 to-emerald-500">
+              Support
+            </span>
           </h2>
         </div>
 
+        {/* GRID */}
         <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
           {SERVICES.map((service, i) => (
-            <motion.div 
+            <motion.div
               key={i}
-              // ✅ HYBRID LOGIC: whileHover for Desktop, whileInView for Mobile
-              whileHover={{ y: -5, borderColor: "rgba(16, 185, 129, 0.5)" }}
-              whileInView={{ scale: [0.98, 1], opacity: 1 }}
-              viewport={{ once: true, margin: "-50px" }}
-              className="group bg-slate-900/50 border border-white/5 p-8 transition-all duration-300 relative overflow-hidden rounded-xl backdrop-blur-sm"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-120px" }} // ⬅ earlier trigger = smoother
+              transition={{ duration: 0.5, ease: "easeOut" }}
+              className="
+                group relative rounded-2xl
+                border border-white/10
+                bg-black/40
+                p-8 shadow-xl
+                transition-colors
+                md:hover:border-emerald-500/40
+              "
             >
-              {/* Icon Container with Auto-Scale on Mobile */}
-              <motion.div 
-                whileInView={{ scale: [1, 1.1, 1] }}
-                viewport={{ once: false }}
-                className="w-14 h-14 bg-slate-950 border border-white/10 rounded-lg flex items-center justify-center text-emerald-500 mb-6 group-hover:scale-110 transition-transform shadow-xl"
-              >
+              {/* ICON */}
+              <div className="w-14 h-14 mb-6 rounded-xl border border-white/10 bg-black/50 flex items-center justify-center text-emerald-400 shadow-inner">
                 {getIcon(service.icon)}
-              </motion.div>
+              </div>
 
-              <h3 className="text-lg font-bold uppercase mb-3 text-slate-100 group-hover:text-emerald-400 transition-colors">
+              {/* TITLE */}
+              <h3 className="text-lg font-black uppercase text-white mb-3">
                 {service.title}
               </h3>
-              <p className="text-slate-400 text-sm leading-relaxed mb-6 border-l-2 border-white/10 pl-4 group-hover:border-emerald-500/50 transition-colors">
+
+              {/* DESCRIPTION */}
+              <p className="text-slate-400 text-sm leading-relaxed border-l-4 border-white/10 pl-4 mb-8 md:group-hover:border-emerald-500/50 transition-colors">
                 {service.desc}
               </p>
 
-              <div className="flex items-center gap-2 text-[10px] font-bold uppercase tracking-widest text-slate-500 group-hover:text-white transition-colors">
-                Learn More <ArrowUpRight size={14} className="text-emerald-500" />
+              {/* VISUAL AFFORDANCE (DESKTOP ONLY) */}
+              <div className="hidden md:block absolute bottom-6 right-6 opacity-40 group-hover:opacity-80 transition-opacity">
+                <ArrowUpRight size={18} className="text-emerald-400" />
               </div>
             </motion.div>
           ))}

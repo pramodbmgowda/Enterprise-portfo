@@ -1,70 +1,84 @@
 "use client";
-import { motion } from 'framer-motion';
-import { ChevronRight, ShieldCheck } from 'lucide-react';
+
+import { motion } from "framer-motion";
+import { ChevronRight, ShieldCheck, Phone } from "lucide-react";
 
 export function Hero() {
   return (
-    <section id="home" className="relative h-screen min-h-[650px] bg-slate-950 text-white overflow-hidden flex items-center">
-      
-      {/* 1. BACKGROUND */}
-      <div className="absolute inset-0 z-0">
-        <img 
-          src="/hero.jpeg"
-          alt="Farm and Home Landscape"
-          className="w-full h-full object-cover opacity-100" 
-        />
-        
-        {/* Gradient: Dark Left -> Transparent Right */}
-        <div className="absolute inset-0 bg-gradient-to-r from-slate-950 via-slate-950/90 to-transparent md:via-slate-950/60"></div>
-        {/* Gradient: Bottom Up */}
-        <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-transparent to-transparent"></div>
+    <section
+      id="home"
+      className="relative min-h-screen overflow-hidden flex items-center text-white"
+    >
+      {/* ================= BACKGROUND MAGIC ================= */}
+      <div className="absolute inset-0 -z-10">
+        {/* Base soil tone */}
+        <div className="absolute inset-0 bg-gradient-to-br from-[#0b0f0d] via-[#0f1a16] to-[#050807]" />
+
+        {/* Emerald growth glow */}
+        <div className="absolute -top-1/3 -left-1/3 w-[700px] h-[700px] bg-emerald-500/20 rounded-full blur-[140px]" />
+        <div className="absolute top-1/4 right-[-20%] w-[600px] h-[600px] bg-emerald-400/10 rounded-full blur-[160px]" />
+
+        {/* Warm trust accent */}
+        <div className="absolute bottom-[-30%] left-1/3 w-[500px] h-[500px] bg-amber-400/10 rounded-full blur-[160px]" />
+
+        {/* Subtle vignette */}
+        <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-black/30" />
+
+        {/* Grain illusion */}
+        <div className="absolute inset-0 opacity-[0.04] bg-[radial-gradient(#ffffff_1px,transparent_1px)] [background-size:3px_3px]" />
       </div>
 
-      {/* 2. CONTENT LAYER */}
-      <div className="container mx-auto px-4 relative z-10 pt-20">
-        <motion.div 
-          initial={{ opacity: 0, y: 30 }} 
-          animate={{ opacity: 1, y: 0 }} 
-          transition={{ duration: 0.8, ease: "easeOut" }}
-          className="max-w-4xl flex flex-col items-start" // items-start enforces perfect left alignment
+      {/* ================= CONTENT ================= */}
+      <div className="container mx-auto px-4 pt-24">
+        <motion.div
+          initial={{ opacity: 0, y: 50 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.9, ease: "easeOut" }}
+          className="max-w-4xl"
         >
-          {/* BADGE: Brighter Gold, Perfect Alignment */}
-          <div className="inline-flex items-center gap-2 border border-amber-500/40 bg-amber-950/80 backdrop-blur-md px-4 py-2 rounded-sm mb-8 shadow-lg ring-1 ring-amber-500/20">
-            <ShieldCheck size={16} className="text-amber-400" />
-            <span className="text-amber-400 font-bold uppercase tracking-widest text-xs">
+          {/* TRUST BADGE */}
+          <div className="inline-flex items-center gap-2 mb-8 px-4 py-2 rounded-sm border border-emerald-400/30 bg-emerald-950/40 backdrop-blur-md">
+            <ShieldCheck size={16} className="text-emerald-400" />
+            <span className="text-xs uppercase tracking-widest font-bold text-emerald-300">
               Trusted by 12,000+ Farm Families
             </span>
           </div>
 
           {/* HEADLINE */}
-          <h1 className="text-5xl md:text-7xl lg:text-8xl font-black text-white leading-[0.95] mb-8 uppercase tracking-tighter drop-shadow-2xl">
+          <h1 className="font-black uppercase tracking-tight leading-[0.95] mb-8 text-4xl sm:text-6xl lg:text-8xl">
             Powering Your <br />
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 to-emerald-600">
-              Farm & Home.
+            <span className="bg-clip-text text-transparent bg-gradient-to-r from-emerald-300 via-emerald-400 to-emerald-600">
+              Farm & Home
             </span>
           </h1>
 
-          {/* DESCRIPTION: Glassmorphism Fix */}
-          <div className="mb-12 max-w-2xl bg-slate-950/40 backdrop-blur-md border border-white/10 p-6 rounded-lg shadow-2xl">
-            <p className="text-lg md:text-xl text-slate-200 font-light leading-relaxed border-l-2 border-emerald-500 pl-4">
-              From the field to your doorstep. We provide the machinery, service, and support that keeps your agricultural livelihood running smooth.
+          {/* DESCRIPTION */}
+          <div className="max-w-2xl mb-12 border-l-4 border-emerald-500 pl-6">
+            <p className="text-base sm:text-lg md:text-xl text-slate-300 leading-relaxed">
+              Sales, service, and government subsidy–supported agricultural
+              machinery — built for farmers who value reliability and results.
             </p>
           </div>
 
-          {/* BUTTONS */}
-          <div className="flex flex-col sm:flex-row gap-4 w-full sm:w-auto">
-            <a 
-              href="#inventory" 
-              className="group bg-emerald-600 hover:bg-emerald-500 text-white px-10 py-5 text-lg font-black uppercase tracking-widest transition-all shadow-[0_0_20px_rgba(5,150,105,0.4)] hover:shadow-[0_0_30px_rgba(5,150,105,0.6)] flex items-center justify-center gap-2 rounded-sm"
+          {/* CTA */}
+          <div className="flex flex-col sm:flex-row gap-4">
+            <a
+              href="#inventory"
+              className="group bg-emerald-600 hover:bg-emerald-500 px-8 py-5 text-sm sm:text-base font-black uppercase tracking-widest flex items-center justify-center gap-2 rounded-sm shadow-[0_0_30px_rgba(16,185,129,0.5)] transition-all"
             >
-              View Machinery <ChevronRight size={20} className="group-hover:translate-x-1 transition-transform"/>
+              View Machinery
+              <ChevronRight
+                size={20}
+                className="transition-transform group-hover:translate-x-1"
+              />
             </a>
-            
-            <a 
-              href="#contact" 
-              className="px-10 py-5 text-lg font-bold uppercase tracking-widest text-white border border-white/20 hover:bg-white hover:text-slate-950 transition-all flex items-center justify-center rounded-sm backdrop-blur-sm"
+
+            <a
+              href="tel:+91XXXXXXXXXX"
+              className="group border border-white/30 hover:bg-white hover:text-black px-8 py-5 text-sm sm:text-base font-black uppercase tracking-widest flex items-center justify-center gap-2 rounded-sm transition-all"
             >
-              Visit Our Store
+              Call Now
+              <Phone size={18} />
             </a>
           </div>
         </motion.div>
