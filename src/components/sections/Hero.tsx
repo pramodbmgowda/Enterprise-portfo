@@ -63,19 +63,28 @@ export function Hero() {
             </a>
           </div>
 
-          {/* STATS (NOW HERE – SUBTLE, TRUST-DRIVEN) */}
-          <div className="grid grid-cols-3 gap-8 max-w-xl">
-            {STATS.map((stat, i) => (
-              <div key={i} className="text-left">
-                <div className="text-3xl md:text-4xl font-black text-white">
-                  {stat.value}
-                </div>
-                <div className="text-[10px] uppercase tracking-widest text-slate-400 font-bold">
-                  {stat.label}
-                </div>
-              </div>
-            ))}
-          </div>
+          {/* STATS */}
+<div
+  className="
+    grid grid-cols-1
+    sm:grid-cols-3
+    gap-8
+    max-w-xl
+    text-center
+    sm:text-left
+  "
+>
+  {STATS.map((stat, i) => (
+    <div key={i}>
+      <div className="text-3xl md:text-4xl font-black text-white">
+        {stat.value}
+      </div>
+      <div className="text-[10px] uppercase tracking-widest text-slate-400 font-bold">
+        {stat.label}
+      </div>
+    </div>
+  ))}
+</div>
 
         </motion.div>
       </div>
