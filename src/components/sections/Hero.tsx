@@ -7,10 +7,7 @@ export function Hero() {
   return (
     <section
       id="home"
-      className="
-        relative min-h-screen overflow-hidden text-white
-        flex items-start md:items-center
-      "
+      className="relative min-h-screen overflow-hidden text-white flex items-center"
     >
       {/* ================= BACKGROUND MAGIC ================= */}
       <div className="absolute inset-0 -z-10">
@@ -26,12 +23,17 @@ export function Hero() {
       </div>
 
       {/* ================= CONTENT ================= */}
-      <div className="container mx-auto px-4 pt-20 sm:pt-24 md:pt-0">
+      <div className="container mx-auto px-4">
         <motion.div
           initial={{ opacity: 0, y: 40 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, ease: "easeOut" }}
-          className="max-w-4xl"
+          className="
+            max-w-4xl
+            translate-y-6
+            sm:translate-y-10
+            md:translate-y-0
+          "
         >
           {/* TRUST BADGE */}
           <div className="inline-flex items-center gap-2 mb-6 px-4 py-2 rounded-sm border border-emerald-400/30 bg-emerald-950/40 backdrop-blur-md">
