@@ -40,8 +40,8 @@ export const CATEGORIES = [
   },
   {
     id: "others",
-    title: "Water Solutions",
-    desc: "Submersible & Diesel Pumps",
+    title: "Others",
+    desc: "Farmming equipments & Spares",
     image: "/pump.jpeg", // Ensure this file exists in public/
     colSpan: "md:col-span-2",
   },
