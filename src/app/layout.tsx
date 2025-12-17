@@ -7,7 +7,7 @@ const inter = Inter({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
   title: 'Sri Kaalabhyraveshwara Enterprises',
-  description: 'Premium Agriculture Machinery Retailer',
+  description: 'Agriculture Machinery Retailer',
 };
 
 export default function RootLayout({
