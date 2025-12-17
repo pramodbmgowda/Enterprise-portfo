@@ -63,23 +63,40 @@ export function Hero() {
             </a>
           </div>
 
-          {/* STATS */}
+          {/* STATS — Industry Standard */}
 <div
   className="
+    mt-14
+    max-w-xl
+    mx-auto
     grid grid-cols-1
     sm:grid-cols-3
-    gap-8
-    max-w-xl
+    gap-10
     text-center
-    sm:text-left
   "
 >
   {STATS.map((stat, i) => (
-    <div key={i}>
-      <div className="text-3xl md:text-4xl font-black text-white">
+    <div key={i} className="flex flex-col items-center">
+      <div
+        className="
+          text-3xl md:text-4xl
+          font-black
+          text-white
+          tabular-nums
+        "
+      >
         {stat.value}
       </div>
-      <div className="text-[10px] uppercase tracking-widest text-slate-400 font-bold">
+      <div
+        className="
+          mt-1
+          text-[10px]
+          uppercase
+          tracking-widest
+          text-slate-400
+          font-semibold
+        "
+      >
         {stat.label}
       </div>
     </div>
