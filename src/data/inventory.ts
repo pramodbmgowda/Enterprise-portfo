@@ -38,13 +38,7 @@ export const CATEGORIES = [
     image: "/pump.jpeg", // Ensure this file exists in public/
     colSpan: "md:col-span-2",
   },
-  {
-    id: "others",
-    title: "Others",
-    desc: "Farmming equipments & Spares",
-    image: "/pump.jpeg", // Ensure this file exists in public/
-    colSpan: "md:col-span-2",
-  },
+
 ];
 
 export const SERVICES = [
