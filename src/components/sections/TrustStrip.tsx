@@ -9,14 +9,25 @@ export function TrustStrip() {
       {/* 1. STATS SECTION: Clean, airy, authoritative */}
       <div className="container mx-auto px-4 py-16 grid grid-cols-3 gap-8 border-b border-white/5">
         {STATS.map((stat, i) => (
-          <div key={i} className="text-center group cursor-default">
+          <motion.div 
+            key={i} 
+            // ✅ MOBILE REVEAL: Stats pulse and brighten when scrolled into view
+            whileInView={{ 
+              scale: [1, 1.05, 1],
+              opacity: [0.7, 1] 
+            }}
+            viewport={{ once: true, amount: 0.5 }}
+            transition={{ duration: 0.6, delay: i * 0.1 }}
+            className="text-center group cursor-default"
+          >
+            {/* Desktop Hover functionality remains via group-hover classes */}
             <div className="text-4xl md:text-6xl font-black text-white mb-2 group-hover:text-emerald-500 transition-colors duration-500">
               {stat.value}
             </div>
             <div className="text-slate-400 font-bold uppercase tracking-widest text-[10px] md:text-xs group-hover:text-white transition-colors">
               {stat.label}
             </div>
-          </div>
+          </motion.div>
         ))}
       </div>
 
@@ -38,9 +49,15 @@ export function TrustStrip() {
             transition={{ repeat: Infinity, ease: "linear", duration: 30 }}
           >
             {[...BRANDS, ...BRANDS, ...BRANDS, ...BRANDS].map((brand, i) => (
-              <span key={i} className="text-3xl md:text-5xl font-black text-white/20 uppercase cursor-default select-none hover:text-white/80 transition-colors duration-300">
+              <motion.span 
+                key={i} 
+                // ✅ MOBILE: Subtle glow for the brands as they enter the screen center
+                whileInView={{ color: "rgba(255, 255, 255, 0.4)" }}
+                viewport={{ once: false, amount: "all" }}
+                className="text-3xl md:text-5xl font-black text-white/20 uppercase cursor-default select-none hover:text-white/80 transition-colors duration-300"
+              >
                 {brand}
-              </span>
+              </motion.span>
             ))}
           </motion.div>
 
