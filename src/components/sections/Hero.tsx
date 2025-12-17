@@ -63,44 +63,65 @@ export function Hero() {
             </a>
           </div>
 
-          {/* STATS — Industry Standard */}
-<div
-  className="
-    mt-14
-    max-w-xl
-    mx-auto
-    grid grid-cols-1
-    sm:grid-cols-3
-    gap-10
-    text-center
-  "
->
-  {STATS.map((stat, i) => (
-    <div key={i} className="flex flex-col items-center">
-      <div
-        className="
-          text-3xl md:text-4xl
-          font-black
-          text-white
-          tabular-nums
-        "
+          {/* STATS — Sequential Reveal (10/10 Mobile UX) */}
+<div className="mt-16 relative w-full">
+  {/* The Technical Divider */}
+  <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-xl h-[1px] bg-gradient-to-r from-transparent via-emerald-500/50 to-transparent mb-10" />
+  
+  <div 
+    className="
+      pt-10
+      flex 
+      flex-col           /* Vertical on Mobile */
+      sm:flex-row        /* Horizontal on Desktop */
+      items-center       /* Centered for Mobile */
+      sm:items-start     /* Left-aligned for Desktop */
+      justify-center 
+      sm:justify-start 
+      gap-16             /* Increased gap for clear separation during scroll */
+      md:gap-20
+    "
+  >
+    {STATS.map((stat, i) => (
+      <motion.div 
+        key={i} 
+        // Initial state: Invisible and slightly lower
+        initial={{ opacity: 0, y: 30 }}
+        // On Desktop (sm+): Animate immediately
+        // On Mobile: Animate only when it enters the viewport
+        whileInView={{ opacity: 1, y: 0 }}
+        // viewport amount 0.8 means 80% of the stat must be visible before it pops in
+        viewport={{ 
+          once: true, 
+          amount: 0.8,
+          margin: "0px 0px -50px 0px" // Triggers slightly before hitting the bottom
+        }}
+        transition={{ 
+          duration: 0.7, 
+          ease: [0.21, 1.11, 0.81, 0.99], // Custom spring-like cubic bezier
+          delay: typeof window !== 'undefined' && window.innerWidth > 640 ? i * 0.1 : 0 
+        }}
+        className="flex flex-col items-center sm:items-start group"
       >
-        {stat.value}
-      </div>
-      <div
-        className="
-          mt-1
-          text-[10px]
-          uppercase
-          tracking-widest
-          text-slate-400
-          font-semibold
-        "
-      >
-        {stat.label}
-      </div>
-    </div>
-  ))}
+        <div className="flex items-baseline gap-1">
+          <span className="text-5xl md:text-5xl font-black text-white tracking-tighter tabular-nums group-hover:text-emerald-400 transition-colors duration-300">
+            {stat.value.replace(/[^0-9]/g, '')}
+          </span>
+          <span className="text-2xl md:text-2xl font-bold text-emerald-500">
+            {stat.value.replace(/[0-9]/g, '')}
+          </span>
+        </div>
+        
+        <div className="mt-2 flex items-center gap-3">
+          <div className="h-[1px] w-3 bg-emerald-500/40 hidden sm:block" />
+          <span className="text-[11px] md:text-xs uppercase tracking-[0.3em] text-slate-500 font-extrabold whitespace-nowrap">
+            {stat.label}
+          </span>
+          <div className="h-[1px] w-3 bg-emerald-500/40 hidden sm:block" />
+        </div>
+      </motion.div>
+    ))}
+  </div>
 </div>
 
         </motion.div>

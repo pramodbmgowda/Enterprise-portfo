@@ -66,7 +66,7 @@ export const SERVICES = [
 
 export const STATS = [
   { label: "Authorized Brands", value: "25+" },
-  { label: "Machines Sold", value: "15,000+" },
+  { label: "Machines Sold", value: "15000+" },
   { label: "Service Engineers", value: "18" },
 ];
 export const OWNER = {
