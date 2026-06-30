@@ -55,9 +55,9 @@ export function LeadCapture() {
                     Showroom
                   </p>
                   <p className="text-slate-300 text-sm">
-                    Bettahalli, Hutridurga<br />
+                    Bettahalli, Senthepete, Hutridurga<br />
                     Kunigal, Karnataka
-                  </p>
+                  </p> 
                 </div>
               </div>
 
@@ -70,7 +70,7 @@ export function LeadCapture() {
                     Sales Support
                   </p>
                   <p className="text-slate-300 text-sm font-mono">
-                    +91 99000 00000
+                    +91 9844107053
                   </p>
                 </div>
               </div>

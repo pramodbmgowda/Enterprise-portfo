@@ -1,8 +1,8 @@
 export const SITE_CONFIG = {
-  name: "Sri Kaalabhyraveshwara Enterprises",
-  phone: "+91 99000 00000",
-  email: "sales@agricorp-retail.com",
-  address: "Bettahalli, Hutridurga, Kunigal, Karnataka",
+  name: "GreenRider Enterprises",
+  phone: "+91 9844107053",
+  email: "sales@greenrider.in",
+  address: "Bettahalli, Senthepete, Hutridurga, Kunigal, Karnataka",
 };
 
 export const BRANDS = [
@@ -12,54 +12,91 @@ export const BRANDS = [
 export const CATEGORIES = [
   {
     id: "weeders",
-    title: "Soil Preparation",
-    desc: "Power Weeders & Tillers",
-    image: "/weeder.jpeg", // Ensure this file exists in public/
+    title: "Power Weeders & Tillers",
+    desc: "Heavy-Duty Petrol & Diesel Models",
+    image: "/weeder.jpeg",
     colSpan: "md:col-span-2",
   },
   {
     id: "sprayers",
-    title: "Plant Protection",
-    desc: "Powered Sprayers",
-    image: "/sprayers.jpeg", // Ensure this file exists in public/
+    title: "Power & Battery Sprayers",
+    desc: "High-Pressure Knapsack & Portable Models",
+    image: "/sprayers.jpeg",
     colSpan: "md:col-span-1",
   },
   {
     id: "cutters",
-    title: "Harvesting",
-    desc: "Brush Cutters & Chainsaws",
-    image: "/cutter.jpeg", // Ensure this file exists in public/
+    title: "Brush Cutters & Chainsaws",
+    desc: "Petrol & Electric Cutting Equipment",
+    image: "/cutter.jpeg",
     colSpan: "md:col-span-1",
   },
   {
     id: "pumps",
-    title: "Water Solutions",
-    desc: "Submersible & Diesel Pumps",
-    image: "/pump.jpeg", // Ensure this file exists in public/
+    title: "Water Pumps & Motors",
+    desc: "Diesel, Petrol & Submersible Pumps",
+    image: "/pump.jpeg",
     colSpan: "md:col-span-2",
   },
+  {
+    id: "dairy",
+    title: "Milking & Dairy Equipment",
+    desc: "Milkers, Chillers & Processing Units",
+    image: "/dairy.jpeg",
+    colSpan: "md:col-span-2",
+  },
+];
 
+export const PRODUCTS = [
+  {
+    id: "honda-fj500",
+    categoryId: "weeders",
+    name: "Honda FJ500 Power Weeder",
+    image: "/products/fj500.jpeg",
+    specs: ["4-stroke engine", "5.5 HP", "2-year warranty", "Tilling width: 500mm"],
+  },
+  {
+    id: "stihl-fs-220",
+    categoryId: "cutters",
+    name: "Stihl FS 220 Brush Cutter",
+    image: "/products/fs220.jpeg",
+    specs: ["2-stroke engine", "Lightweight build", "Harness included"],
+  },
+  {
+    id: "single-bucket-milker",
+    categoryId: "dairy",
+    name: "Single Bucket Milking Machine",
+    image: "/products/milking-machine.jpeg",
+    specs: ["Vacuum pump motor", "Stainless steel claw", "25L bucket capacity"],
+  },
+  {
+    id: "milk-chiller-200l",
+    categoryId: "dairy",
+    name: "200L Bulk Milk Chiller",
+    image: "/products/milk-chiller.jpeg",
+    specs: ["Direct expansion cooling", "Auto agitator", "Cools to 4°C within 3hrs"],
+  }
 ];
 
 export const SERVICES = [
   {
     title: "Genuine Sales",
-    desc: "Authorized retailer for 25+ global brands. We sell only original machinery with valid manufacturer warranty.",
+    desc: "Whether you buy a GreenRider or .., Every machine ships with a valid manufacturer warranty — no grey-market risk.",
     icon: "tag"
   },
   {
     title: "Expert Repairs",
-    desc: "Our workshop is equipped with special tools for Honda & Stihl engines. Factory-trained mechanics on duty.",
+    desc: "When the rain hits, you can't wait days for a mechanic. Our factory-trained engineers prioritize emergency field repairs to save your season.",
     icon: "wrench"
   },
   {
     title: "Spare Parts Hub",
-    desc: "Massive stock of genuine spares. Belts, blades, pistons, and filters available off-the-shelf.",
+    desc: "Deep on-shelf stock of genuine spares — belts, blades, pistons, filters. No multi-week wait for a part.",
     icon: "settings"
   },
   {
-    title: "Subsidy Assistance",
-    desc: "Full guidance for SMAM & Agriculture Dept subsidies. We handle the paperwork for eligible farmers.",
+    title: "Govt. Subsidy",
+    desc: "Don't let complex paperwork stop you from claiming your rightful  subsidy money. We prepare, submit, and fight for your file.",
     icon: "file"
   }
 ];
@@ -69,11 +106,12 @@ export const STATS = [
   { label: "Machines Sold", value: "15000+" },
   { label: "Service Engineers", value: "18" },
 ];
+
 export const OWNER = {
-  name: "Mr. Purushotham", 
-  role: "Proprietor",
-  image: "/owner.png", 
-  message: "Farming is a time-bound business. You cannot afford downtime waiting for parts or service. I established this dealership to guarantee that when you buy a machine from us, you aren't just buying metal—you are buying my personal commitment to keep your work running.",
-  experience: "Since 2017",
-  signature: "Your Trust, Our Legacy."
+  name: "Mr. Purushotham",
+  role: "Founder, Son of a Farmer", 
+  image: "/owner.png",
+  message: "Namaskara. Farming is not just a business for us; it is our heritage. I have seen farmers lose entire yields because a cheap machine broke down right when the rains started. I built GreenRider to end that tension. When you take a machine from my showroom, you don't just get metal and an engine—you get my personal guarantee. You do the hard work in the field; leave the machine's tension to me.",
+  experience: "Standing by Farmers Since 2017",
+  signature: "My Word. Your Yield."
 };
