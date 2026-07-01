@@ -85,5 +85,4 @@ export function BentoGrid() {
       </div>
     </section>
   );
-  
 }

@@ -1,87 +1,55 @@
 "use client";
-import Link from "next/link";
-import { motion } from "framer-motion";
-import { useState } from "react";
-import { ImageOff } from "lucide-react";
 
-type Product = {
+import Link from "next/link";
+import Image from "next/image";
+import { ArrowUpRight } from "lucide-react";
+
+interface Product {
   id: string;
   name: string;
+  price: string;
   image: string;
-  brand: string;
-  isOwnBrand: boolean;
-  badge: string;
-};
+  categoryId: string;
+}
 
-export function ProductCard({
-  product,
-  slug,
-  index,
-}: {
-  product: Product;
-  slug: string;
-  index: number;
-}) {
-  const [imgError, setImgError] = useState(false);
-
+export function ProductCard({ product }: { product: Product }) {
   return (
-    <motion.div
-      initial={{ opacity: 0, y: 16 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.4, delay: index * 0.06, ease: "easeOut" }}
+    <Link 
+      href={`/category/${product.categoryId}/${product.id}`}
+      className="group relative block border border-white/10 bg-slate-900 overflow-hidden hover:border-emerald-500/50 transition-all duration-500"
     >
-      <Link
-        href={`/category/${slug}/${product.id}`}
-        className="group block rounded-2xl overflow-hidden border border-white/10 bg-black/40 hover:border-emerald-500/40 transition-colors"
-      >
-        <div className="relative h-48 md:h-56 bg-slate-900 flex items-center justify-center overflow-hidden">
+      {/* Image Container */}
+      <div className="relative h-64 w-full overflow-hidden bg-slate-950">
+        <Image
+          src={product.image}
+          alt={product.name}
+          fill
+          sizes="(max-width: 768px) 100vw, 33vw"
+          className="object-cover opacity-60 group-hover:opacity-100 group-hover:scale-105 transition-all duration-700"
+        />
+        {/* Overlay gradient */}
+        <div className="absolute inset-0 bg-gradient-to-t from-slate-950 to-transparent opacity-60" />
+      </div>
 
-          {/* IN STOCK — top right */}
-          <div className="absolute top-3 right-3 z-10">
-            <span className="font-mono text-[9px] text-emerald-400 border border-emerald-400/30 bg-black/80 backdrop-blur-sm px-2 py-1 rounded-sm tracking-widest">
-              IN STOCK
-            </span>
-          </div>
-
-          {/* Brand badge — top left, different style per brand type */}
-          <div className="absolute top-3 left-3 z-10">
-            {product.isOwnBrand ? (
-              <span className="text-[9px] font-black uppercase tracking-widest bg-emerald-600 text-white px-2.5 py-1 rounded-sm">
-                GreenRider
-              </span>
-            ) : (
-              <span className="text-[9px] font-black uppercase tracking-widest bg-black/70 border border-white/20 text-slate-300 px-2.5 py-1 rounded-sm backdrop-blur-sm">
-                {product.brand}
-              </span>
-            )}
-          </div>
-
-          {imgError ? (
-            <div className="flex flex-col items-center gap-2 text-slate-600">
-              <ImageOff size={28} />
-              <span className="text-[10px] uppercase tracking-widest font-bold">
-                Image unavailable
-              </span>
-            </div>
-          ) : (
-            <img
-              src={product.image}
-              alt={product.name}
-              onError={() => setImgError(true)}
-              className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-            />
-          )}
-        </div>
-
-        <div className="p-4">
-          <h3 className="text-sm md:text-base font-bold text-white group-hover:text-emerald-400 transition-colors leading-snug">
+      {/* Content */}
+      <div className="p-8">
+        <div className="flex justify-between items-start mb-4">
+          <h3 className="text-lg font-black uppercase tracking-tight text-white group-hover:text-emerald-400 transition-colors">
             {product.name}
           </h3>
-          <p className="text-[10px] uppercase tracking-widest text-slate-500 font-bold mt-1">
-            {product.badge}
-          </p>
+          <ArrowUpRight 
+            size={18} 
+            className="text-emerald-500 opacity-0 group-hover:opacity-100 transition-all duration-300 transform -translate-y-2 group-hover:translate-y-0" 
+          />
         </div>
-      </Link>
-    </motion.div>
+        
+        <p className="text-emerald-600 font-mono text-xs uppercase tracking-widest">
+          {product.price}
+        </p>
+      </div>
+
+      {/* Active state line */}
+      <div className="absolute bottom-0 left-0 h-[2px] w-0 bg-emerald-500 group-hover:w-full transition-all duration-500 ease-out" />
+    </Link>
   );
 }
