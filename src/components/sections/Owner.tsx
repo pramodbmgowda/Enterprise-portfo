@@ -1,100 +1,64 @@
 "use client";
 
 import { OWNER, SITE_CONFIG } from "@/data/inventory";
-import { ShieldCheck, Phone, BadgeCheck } from "lucide-react";
+import { Phone, Quote } from "lucide-react";
 import { motion } from "framer-motion";
 
 export function Owner() {
   return (
-    <section className="relative py-24 md:py-32 overflow-hidden border-t border-white/5">
-      {/* Background depth */}
-      <div className="absolute inset-0 -z-10 bg-gradient-to-br from-[#0b0f0d] via-[#0f1a16] to-[#050807]" />
-
+    <section className="relative py-20 bg-slate-950 border-t border-white/5">
       <div className="container mx-auto px-4">
-        <div className="max-w-6xl mx-auto grid md:grid-cols-5 rounded-3xl overflow-hidden border border-white/10 bg-white/5 backdrop-blur-sm shadow-2xl">
-
-          {/* ================= IMAGE (TOP ON MOBILE) ================= */}
-          <div className="order-1 md:order-2 md:col-span-2 relative flex items-end justify-center bg-black/40">
-            {/* Gradient frame */}
-            <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent" />
-
-            <motion.img
-              src={OWNER.image}
-              alt={OWNER.name}
-              initial={{ opacity: 0, scale: 1.05 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              viewport={{ once: true }}
-              transition={{ duration: 1, ease: "easeOut" }}
-              className="relative z-10 w-[85%] md:w-[90%] object-contain drop-shadow-2xl"
-              style={{
-                maskImage:
-                  "linear-gradient(to bottom, black 85%, transparent 100%)",
-              }}
-            />
-
-            {/* Verified Badge */}
-            <div className="absolute top-6 right-6 z-20 bg-black/60 backdrop-blur-md p-2 rounded-lg border border-white/10">
-              <BadgeCheck
-                size={22}
-                className="text-blue-500"
-                fill="currentColor"
-                stroke="white"
-              />
-            </div>
-          </div>
-
-          {/* ================= CONTENT (BOTTOM ON MOBILE) ================= */}
-          <div className="order-2 md:order-1 md:col-span-3 p-10 md:p-16 flex items-center">
-            <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.8, ease: "easeOut" }}
-              className="max-w-xl"
-            >
-              {/* Trust Label */}
-              <div className="inline-flex items-center gap-2 mb-8 px-4 py-2 border border-emerald-400/30 bg-emerald-950/40 rounded-sm">
-                <ShieldCheck size={14} className="text-emerald-400" />
-                <span className="text-xs font-bold uppercase tracking-widest text-emerald-300">
-                  Proprietor’s Assurance
-                </span>
-              </div>
-
-              <h2 className="text-3xl md:text-5xl font-black uppercase tracking-tight text-white mb-2">
+        
+        {/* Compact Container */}
+        <motion.div 
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          className="max-w-4xl mx-auto rounded-xl border border-white/10 bg-white/[0.03] overflow-hidden flex flex-col md:flex-row shadow-2xl"
+        >
+          
+          {/* Text Side (Left on desktop, Bottom on mobile) */}
+          <div className="md:w-3/5 p-8 md:p-10 flex flex-col justify-center relative order-2 md:order-1">
+            {/* Decorative Quote Icon */}
+            <Quote size={60} className="text-white/5 absolute top-6 left-6" />
+            
+            <div className="relative z-10">
+              <h3 className="text-2xl font-black uppercase tracking-tight text-white mb-1">
                 {OWNER.name}
-              </h2>
-
-              <p className="text-xs uppercase tracking-[0.3em] text-slate-500 font-bold mb-8">
+              </h3>
+              <p className="text-xs uppercase tracking-widest text-emerald-400 font-bold mb-6">
                 {OWNER.role}
               </p>
 
-              <p className="text-slate-300 text-lg md:text-xl leading-relaxed mb-10">
-                {OWNER.message}
+              <p className="text-slate-300 text-sm md:text-base leading-relaxed mb-8 italic">
+                "{OWNER.message}"
               </p>
 
-              {/* Assurance CTA */}
-              <div className="flex flex-col sm:flex-row gap-4">
-                <div className="flex items-center gap-3 px-5 py-3 border border-white/10 rounded-lg bg-black/30">
-                  <ShieldCheck size={18} className="text-emerald-400" />
-                  <span className="text-sm font-bold text-slate-200">
-                    Serving Since 2017
-                  </span>
-                </div>
-
-                <a
-                  href={`tel:${SITE_CONFIG.phone}`}
-                  className="flex items-center justify-center gap-3 px-6 py-3 rounded-lg bg-emerald-600 hover:bg-emerald-500 transition-all shadow-[0_0_25px_rgba(16,185,129,0.4)]"
-                >
-                  <Phone size={18} />
-                  <span className="text-sm font-black uppercase tracking-widest">
-                    Speak Directly
-                  </span>
-                </a>
-              </div>
-            </motion.div>
+              <a
+                href={`tel:${SITE_CONFIG.phone}`}
+                className="inline-flex items-center gap-2 bg-emerald-600 hover:bg-emerald-500 text-white px-6 py-3 rounded font-bold uppercase tracking-widest text-xs transition-colors shadow-lg shadow-emerald-900/20 w-fit"
+              >
+                <Phone size={14} /> Speak Directly
+              </a>
+            </div>
           </div>
 
-        </div>
+          {/* Image Side (Right on desktop, Top on mobile) */}
+          <div className="md:w-2/5 relative bg-gradient-to-br from-slate-900 to-slate-950 flex items-center justify-center py-12 md:py-0 order-1 md:order-2 border-b md:border-b-0 md:border-l border-white/5 min-h-[300px]">
+             {/* Subtle lighting glow behind the circular image */}
+             <div className="absolute w-48 h-48 bg-emerald-500/10 blur-3xl rounded-full" />
+             
+             {/* Premium Circular Avatar Wrapper */}
+             <div className="relative z-10 w-48 h-48 md:w-56 md:h-56 rounded-full p-1 bg-gradient-to-br from-emerald-500/40 to-slate-800 shadow-2xl">
+               <img
+                src={OWNER.image}
+                alt={OWNER.name}
+                className="w-full h-full object-cover object-top rounded-full bg-slate-900 border-4 border-slate-950"
+               />
+             </div>
+          </div>
+
+        </motion.div>
       </div>
     </section>
   );

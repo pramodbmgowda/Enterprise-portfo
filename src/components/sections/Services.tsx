@@ -1,76 +1,102 @@
 "use client";
 
 import { SERVICES } from "@/data/inventory";
-import { Wrench, Settings, FileText, Tag, ArrowUpRight } from "lucide-react";
+import { Wrench, Settings, FileText, Tag } from "lucide-react";
 import { motion } from "framer-motion";
 
 export function Services() {
   const getIcon = (iconName: string) => {
     switch (iconName) {
-      case "tag": return <Tag size={26} strokeWidth={1.5} />;
-      case "wrench": return <Wrench size={26} strokeWidth={1.5} />;
-      case "settings": return <Settings size={26} strokeWidth={1.5} />;
-      case "file": return <FileText size={26} strokeWidth={1.5} />;
-      default: return <Wrench size={26} strokeWidth={1.5} />;
+      case "tag": return <Tag size={28} strokeWidth={1} />;
+      case "wrench": return <Wrench size={28} strokeWidth={1} />;
+      case "settings": return <Settings size={28} strokeWidth={1} />;
+      case "file": return <FileText size={28} strokeWidth={1} />;
+      default: return <Wrench size={28} strokeWidth={1} />;
     }
   };
 
   return (
     <section
       id="features"
-      className="relative py-24 md:py-32 overflow-hidden border-t border-white/5 text-white"
+      className="relative py-24 md:py-32 bg-slate-950 text-white"
     >
-      <div className="absolute inset-0 -z-10 bg-gradient-to-br from-[#0b0f0d] via-[#0f1a16] to-[#050807]" />
-
-      <div className="container mx-auto px-4">
-        <div className="text-center max-w-3xl mx-auto mb-20">
-          <span className="text-emerald-400 font-bold uppercase tracking-[0.25em] text-xs mb-4 block">
-            Why Choose GreenRider
-          </span>
-          <h2 className="text-4xl md:text-6xl font-black uppercase tracking-tight">
-            Complete Farming{" "}
-            <span className="bg-clip-text text-transparent bg-gradient-to-r from-emerald-300 to-emerald-500">
-              Support
-            </span>
-          </h2>
+      <div className="container mx-auto px-4 max-w-7xl">
+        
+        {/* Architectural Header */}
+        <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-8 mb-16 pb-8 border-b border-white/10">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, ease: "easeOut" }}
+          >
+            <div className="flex items-center gap-4 mb-6">
+              <div className="w-1.5 h-1.5 bg-emerald-500 flex-shrink-0" />
+              <span className="text-emerald-400 font-bold uppercase tracking-[0.2em] text-[10px]">
+                The GreenRider Infrastructure
+              </span>
+            </div>
+            <h2 className="text-4xl md:text-5xl lg:text-6xl font-black uppercase tracking-tight leading-[0.9]">
+              Complete <br />
+              <span className="text-slate-500">Operational Support</span>
+            </h2>
+          </motion.div>
+          
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, delay: 0.1, ease: "easeOut" }}
+            className="max-w-md lg:text-right"
+          >
+            <p className="text-slate-400 text-sm leading-relaxed border-l lg:border-l-0 lg:border-r border-white/10 pl-4 lg:pl-0 lg:pr-4">
+              A machine is only as good as the infrastructure keeping it running. We maintain absolute control over our spares, servicing, and documentation to guarantee zero downtime.
+            </p>
+          </motion.div>
         </div>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+        {/* The Blueprint Grid (Replacing Cards) */}
+        <div className="grid md:grid-cols-2 lg:grid-cols-4 border-t border-l border-white/10">
           {SERVICES.map((service, i) => (
             <motion.div
               key={i}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-120px" }}
-              transition={{ duration: 0.5, ease: "easeOut", delay: i * 0.08 }}
-              whileHover={{ y: -4 }}
+              initial={{ opacity: 0 }}
+              whileInView={{ opacity: 1 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.4, delay: i * 0.1 }}
               className="
-                group relative rounded-2xl
-                border border-white/10
-                bg-black/40
-                p-8 shadow-xl
-                transition-colors
-                md:hover:border-emerald-500/40
+                group relative
+                border-r border-b border-white/10
+                p-8 md:p-10
+                bg-transparent hover:bg-white/[0.02]
+                transition-colors duration-500
               "
             >
-              <div className="w-14 h-14 mb-6 rounded-xl border border-white/10 bg-black/50 flex items-center justify-center text-emerald-400 shadow-inner group-hover:bg-emerald-950/40 group-hover:border-emerald-500/30 transition-colors">
-                {getIcon(service.icon)}
+              {/* Structural Indexing */}
+              <div className="flex justify-between items-start mb-16">
+                <span className="font-mono text-[10px] text-slate-600 group-hover:text-emerald-500/50 transition-colors">
+                  SEC_0{i + 1} //
+                </span>
+                <div className="text-slate-600 group-hover:text-emerald-400 transform group-hover:scale-110 transition-all duration-500">
+                  {getIcon(service.icon)}
+                </div>
               </div>
 
-              <h3 className="text-lg font-black uppercase text-white mb-3">
+              {/* Content */}
+              <h3 className="text-lg font-black uppercase tracking-widest text-white mb-4 group-hover:text-emerald-300 transition-colors">
                 {service.title}
               </h3>
 
-              <p className="text-slate-400 text-sm leading-relaxed border-l-4 border-white/10 pl-4 mb-8 md:group-hover:border-emerald-500/50 transition-colors">
+              <p className="text-slate-400 text-sm leading-relaxed">
                 {service.desc}
               </p>
 
-              <div className="hidden md:block absolute bottom-6 right-6 opacity-40 group-hover:opacity-80 group-hover:translate-x-1 group-hover:-translate-y-1 transition-all">
-                <ArrowUpRight size={18} className="text-emerald-400" />
-              </div>
+              {/* Hover Line Indicator */}
+              <div className="absolute bottom-0 left-0 w-0 h-[2px] bg-emerald-500 group-hover:w-full transition-all duration-700 ease-out" />
             </motion.div>
           ))}
         </div>
+        
       </div>
     </section>
   );

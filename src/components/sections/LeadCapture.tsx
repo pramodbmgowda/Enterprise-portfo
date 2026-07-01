@@ -1,160 +1,113 @@
 "use client";
 
-import { Phone, MapPin, ChevronDown, ShieldCheck } from "lucide-react";
+import { Phone, MapPin, ChevronDown, CheckCircle2, Loader2 } from "lucide-react";
+import { useState } from "react";
+import { SITE_CONFIG } from "@/data/inventory";
 
 export function LeadCapture() {
+  const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
+
+  async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
+    e.preventDefault();
+    setStatus("loading");
+    const form = e.currentTarget;
+    const data = {
+      name: (form.elements.namedItem("name") as HTMLInputElement).value,
+      phone: (form.elements.namedItem("phone") as HTMLInputElement).value,
+      category: (form.elements.namedItem("category") as HTMLSelectElement).value,
+      message: (form.elements.namedItem("message") as HTMLTextAreaElement).value,
+    };
+
+    try {
+      const res = await fetch("/api/enquiry", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data),
+      });
+      if (res.ok) { setStatus("success"); form.reset(); } 
+      else { setStatus("error"); }
+    } catch { setStatus("error"); }
+  }
+
   return (
-    <section
-      id="contact"
-      className="relative py-28 overflow-hidden text-white"
-    >
-      {/* ================= BACKGROUND MAGIC ================= */}
-      <div className="absolute inset-0 -z-10">
-        {/* Base */}
-        <div className="absolute inset-0 bg-gradient-to-br from-[#0b0f0d] via-[#0f1a16] to-[#050807]" />
+    <section id="contact" className="relative py-32 bg-slate-950 text-white border-t border-white/10">
+      <div className="container mx-auto px-4 max-w-7xl">
+        
+        {/* Architectural Main Grid */}
+        <div className="grid lg:grid-cols-12 border border-white/10">
 
-        {/* Depth glows */}
-        <div className="absolute -top-1/3 -left-1/3 w-[700px] h-[700px] bg-emerald-500/10 rounded-full blur-[160px]" />
-        <div className="absolute bottom-[-30%] right-[-20%] w-[600px] h-[600px] bg-amber-400/10 rounded-full blur-[160px]" />
-
-        {/* Vignette */}
-        <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-black/30" />
-      </div>
-
-      <div className="container mx-auto px-4">
-        <div className="max-w-6xl mx-auto grid lg:grid-cols-2 rounded-3xl overflow-hidden border border-white/10 backdrop-blur-sm bg-white/5 shadow-2xl">
-          
-          {/* ================= LEFT INFO ================= */}
-          <div className="p-10 md:p-16 flex flex-col justify-between border-b lg:border-b-0 lg:border-r border-white/10 bg-black/20">
+          {/* LEFT: INFO BLOCK */}
+          <div className="lg:col-span-5 p-10 md:p-16 border-b lg:border-b-0 lg:border-r border-white/10 flex flex-col justify-between bg-white/[0.02]">
             <div>
-              <div className="inline-flex items-center gap-2 mb-8 px-4 py-2 rounded-sm border border-emerald-400/30 bg-emerald-950/40">
-                <ShieldCheck size={14} className="text-emerald-400" />
-                <span className="text-xs font-bold uppercase tracking-widest text-emerald-300">
-                  Official Pricing Request
+              <div className="flex items-center gap-4 mb-12">
+                <div className="w-1.5 h-1.5 bg-emerald-500" />
+                <span className="text-emerald-400 font-bold uppercase tracking-[0.2em] text-[10px]">
+                  Direct Procurement
                 </span>
               </div>
-
-              <h3 className="text-4xl md:text-5xl font-black uppercase leading-[1] mb-6">
+              <h3 className="text-4xl md:text-5xl font-black uppercase leading-[0.9] mb-8">
                 Request <br />
-                <span className="text-slate-500">Quotation</span>
+                <span className="text-slate-600">Quotation</span>
               </h3>
-
-              <p className="text-slate-400 text-lg leading-relaxed border-l-4 border-emerald-500/60 pl-6 max-w-md">
-                Get accurate pricing, subsidy guidance, and availability directly
-                from our sales team.
+              <p className="text-slate-400 text-sm leading-relaxed max-w-sm">
+                Accurate pricing, subsidy documentation, and technical specs provided directly by our engineering sales team.
               </p>
             </div>
 
-            <div className="space-y-8 mt-14">
-              <div className="flex gap-5 items-start">
-                <div className="p-3 bg-black/40 border border-white/10 rounded-lg">
-                  <MapPin className="text-emerald-400" size={20} />
-                </div>
-                <div>
-                  <p className="text-xs uppercase tracking-widest font-bold text-slate-400 mb-1">
-                    Showroom
-                  </p>
-                  <p className="text-slate-300 text-sm">
-                    Bettahalli, Senthepete, Hutridurga<br />
-                    Kunigal, Karnataka
-                  </p> 
-                </div>
+            <div className="mt-16 space-y-8">
+              <div className="flex gap-6 items-start">
+                <MapPin className="text-emerald-500 shrink-0" size={18} strokeWidth={1.5} />
+                <p className="text-xs text-slate-500 leading-relaxed uppercase tracking-widest">{SITE_CONFIG.address}</p>
               </div>
-
-              <div className="flex gap-5 items-start">
-                <div className="p-3 bg-black/40 border border-white/10 rounded-lg">
-                  <Phone className="text-emerald-400" size={20} />
-                </div>
-                <div>
-                  <p className="text-xs uppercase tracking-widest font-bold text-slate-400 mb-1">
-                    Sales Support
-                  </p>
-                  <p className="text-slate-300 text-sm font-mono">
-                    +91 9844107053
-                  </p>
-                </div>
+              <div className="flex gap-6 items-start">
+                <Phone className="text-emerald-500 shrink-0" size={18} strokeWidth={1.5} />
+                <p className="text-xs text-slate-500 font-mono tracking-widest">{SITE_CONFIG.phone}</p>
               </div>
             </div>
           </div>
 
-          {/* ================= FORM ================= */}
-          <div className="p-10 md:p-16 bg-black/30">
-            <form className="space-y-6">
-              <div className="grid md:grid-cols-2 gap-6">
-                <div>
-                  <label className="block text-[10px] font-bold uppercase tracking-widest text-slate-500 mb-2">
-                    Client Name
-                  </label>
-                  <input
-                    required
-                    className="w-full bg-black border border-white/10 p-4 text-white text-sm font-bold focus:border-emerald-500 outline-none rounded-sm"
-                    placeholder="ENTER FULL NAME"
-                  />
-                </div>
-
-                <div>
-                  <label className="block text-[10px] font-bold uppercase tracking-widest text-slate-500 mb-2">
-                    Mobile Number
-                  </label>
-                  <div className="relative">
-                    <span className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-500 font-mono text-sm">
-                      +91
-                    </span>
-                    <input
-                      required
-                      pattern="[0-9]{10}"
-                      className="w-full bg-black border border-white/10 p-4 pl-16 text-white text-sm font-mono focus:border-emerald-500 outline-none rounded-sm"
-                      placeholder="99000XXXXX"
-                    />
+          {/* RIGHT: FORM */}
+          <div className="lg:col-span-7 p-10 md:p-16">
+            {status === "success" ? (
+              <div className="h-full flex flex-col items-center justify-center text-center py-20">
+                <CheckCircle2 size={48} className="text-emerald-500 mb-6" strokeWidth={1} />
+                <h4 className="text-lg font-black uppercase tracking-widest">Enquiry Lodged</h4>
+                <p className="text-slate-500 text-sm mt-2">A technical consultant will call you shortly.</p>
+              </div>
+            ) : (
+              <form onSubmit={handleSubmit} className="space-y-8">
+                <div className="grid md:grid-cols-2 gap-8">
+                  <div>
+                    <label className="block text-[10px] font-bold uppercase tracking-[0.2em] text-slate-600 mb-3">Client Name</label>
+                    <input name="name" required className="w-full bg-transparent border-b border-white/20 p-2 text-sm focus:border-emerald-500 outline-none transition-colors" placeholder="NAME" />
+                  </div>
+                  <div>
+                    <label className="block text-[10px] font-bold uppercase tracking-[0.2em] text-slate-600 mb-3">Mobile</label>
+                    <input name="phone" required pattern="[0-9]{10}" className="w-full bg-transparent border-b border-white/20 p-2 text-sm font-mono focus:border-emerald-500 outline-none transition-colors" placeholder="9XXXXXXXXX" />
                   </div>
                 </div>
-              </div>
 
-              <div>
-                <label className="block text-[10px] font-bold uppercase tracking-widest text-slate-500 mb-2">
-                  Machinery Category
-                </label>
-                <div className="relative">
-                  <select
-                    required
-                    defaultValue=""
-                    className="w-full bg-black border border-white/10 p-4 text-white text-sm font-bold focus:border-emerald-500 outline-none appearance-none rounded-sm"
-                  >
-                    <option value="" disabled>
-                      SELECT EQUIPMENT TYPE
-                    </option>
-                    <option>Power Weeder / Tiller</option>
-                    <option>Brush Cutter</option>
-                    <option>Sprayer</option>
-                    <option>Water Pump</option>
-                    <option>Other / Spare Parts</option>
-                  </select>
-                  <ChevronDown
-                    size={16}
-                    className="absolute right-4 top-1/2 -translate-y-1/2 text-slate-500 pointer-events-none"
-                  />
+                <div>
+                  <label className="block text-[10px] font-bold uppercase tracking-[0.2em] text-slate-600 mb-3">Equipment Category</label>
+                  <div className="relative">
+                    <select name="category" required defaultValue="" className="w-full bg-transparent border-b border-white/20 p-2 text-sm outline-none appearance-none cursor-pointer">
+                      <option value="" disabled>SELECT FROM LIST</option>
+                      <option>Power Weeder / Tiller</option><option>Brush Cutter</option><option>Sprayer</option><option>Water Pump</option><option>Dairy Equipment</option>
+                    </select>
+                    <ChevronDown size={14} className="absolute right-0 top-3 text-emerald-500" />
+                  </div>
                 </div>
-              </div>
 
-              <div>
-                <label className="block text-[10px] font-bold uppercase tracking-widest text-slate-500 mb-2">
-                  Requirements
-                </label>
-                <textarea
-                  rows={4}
-                  className="w-full bg-black border border-white/10 p-4 text-white text-sm focus:border-emerald-500 outline-none resize-none rounded-sm"
-                  placeholder="Subsidy details, model preference, usage area..."
-                />
-              </div>
+                <div>
+                  <label className="block text-[10px] font-bold uppercase tracking-[0.2em] text-slate-600 mb-3">Requirement Details</label>
+                  <textarea name="message" rows={3} className="w-full bg-transparent border-b border-white/20 p-2 text-sm focus:border-emerald-500 outline-none resize-none" placeholder="Subsidy, usage area, model preference..." />
+                </div>
 
-              <button className="w-full bg-emerald-600 hover:bg-emerald-500 text-black py-5 font-black uppercase tracking-widest rounded-sm transition-all shadow-[0_0_30px_rgba(16,185,129,0.4)] active:translate-y-0.5">
-                Get Official Quote
-              </button>
-
-              <p className="text-center text-xs text-slate-500 mt-3">
-                No spam. Your details are shared only with our sales team.
-              </p>
-            </form>
+                <button type="submit" disabled={status === "loading"} className="w-full border border-emerald-500 text-emerald-500 hover:bg-emerald-500 hover:text-white py-4 font-black uppercase tracking-[0.2em] text-[11px] transition-all flex items-center justify-center gap-3">
+                  {status === "loading" ? <Loader2 size={14} className="animate-spin" /> : "Submit Enquiry"}
+                </button>
+              </form>
+            )}
           </div>
         </div>
       </div>

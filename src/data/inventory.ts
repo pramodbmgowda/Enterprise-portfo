@@ -47,58 +47,162 @@ export const CATEGORIES = [
   },
 ];
 
-export const PRODUCTS = [
+export type Product = {
+  id: string;
+  categoryId: string;
+  name: string;
+  brand: string;
+  isOwnBrand: boolean;
+  badge: string;
+  image: string;
+  price: string;
+  specs: string[];
+  description: string;
+};
+
+export const PRODUCTS: Product[] = [
+  // ─── WEEDERS ───────────────────────────────────────────
+  {
+    id: "greenrider-gr500",
+    categoryId: "weeders",
+    name: "GreenRider GR-500 Power Weeder",
+    brand: "GreenRider",
+    isOwnBrand: true,
+    badge: "Our Brand",
+    image: "/products/gr-weeder.jpeg",
+    price: "₹38,000",
+    specs: [
+      "4-stroke engine",
+      "5 HP",
+      "1-year service warranty",
+      "Tilling width: 480mm",
+      "Direct workshop support",
+    ],
+    description:
+      "Designed for Indian soil and backed directly by us. If anything goes wrong, you call us — not a distant manufacturer.",
+  },
   {
     id: "honda-fj500",
     categoryId: "weeders",
     name: "Honda FJ500 Power Weeder",
+    brand: "Honda India",
+    isOwnBrand: false,
+    badge: "Authorized Dealer",
     image: "/products/fj500.jpeg",
-    specs: ["4-stroke engine", "5.5 HP", "2-year warranty", "Tilling width: 500mm"],
+    price: "₹45,000",
+    specs: [
+      "4-stroke engine",
+      "5.5 HP",
+      "2-year manufacturer warranty",
+      "Tilling width: 500mm",
+      "OEM spare parts available",
+    ],
+    description:
+      "Genuine Honda machinery sold by an authorized dealer. Full manufacturer warranty, original spare parts, no grey-market risk.",
+  },
+
+  // ─── CUTTERS ───────────────────────────────────────────
+  {
+    id: "greenrider-grbc40",
+    categoryId: "cutters",
+    name: "GreenRider GR-BC40 Brush Cutter",
+    brand: "GreenRider",
+    isOwnBrand: true,
+    badge: "Our Brand",
+    image: "/products/gr-brushcutter.jpeg",
+    price: "₹14,500",
+    specs: [
+      "2-stroke engine",
+      "40cc",
+      "Anti-vibration handle",
+      "Includes blade + nylon head",
+      "Fully serviceable at our workshop",
+    ],
+    description:
+      "Built for everyday Indian farm use. Cost-effective, durable, and fully serviced right here at our showroom.",
   },
   {
     id: "stihl-fs-220",
     categoryId: "cutters",
     name: "Stihl FS 220 Brush Cutter",
+    brand: "Stihl Germany",
+    isOwnBrand: false,
+    badge: "Authorized Dealer",
     image: "/products/fs220.jpeg",
-    specs: ["2-stroke engine", "Lightweight build", "Harness included"],
+    price: "₹22,500",
+    specs: [
+      "2-stroke engine",
+      "German engineering",
+      "Lightweight build",
+      "Harness included",
+      "Manufacturer warranty",
+    ],
+    description:
+      "German-engineered precision for demanding brush and grass cutting. Sold with full Stihl manufacturer warranty.",
   },
+
+  // ─── DAIRY ─────────────────────────────────────────────
   {
     id: "single-bucket-milker",
     categoryId: "dairy",
     name: "Single Bucket Milking Machine",
+    brand: "GreenRider",
+    isOwnBrand: true,
+    badge: "Our Brand",
     image: "/products/milking-machine.jpeg",
-    specs: ["Vacuum pump motor", "Stainless steel claw", "25L bucket capacity"],
+    price: "₹38,000",
+    specs: [
+      "Vacuum pump motor",
+      "Stainless steel claw",
+      "25L bucket capacity",
+      "Direct-from-dealer pricing",
+      "Local service support",
+    ],
+    description:
+      "Direct-from-dealer pricing with full local service support. No middleman, no inflated costs.",
   },
   {
     id: "milk-chiller-200l",
     categoryId: "dairy",
     name: "200L Bulk Milk Chiller",
+    brand: "GreenRider",
+    isOwnBrand: true,
+    badge: "Our Brand",
     image: "/products/milk-chiller.jpeg",
-    specs: ["Direct expansion cooling", "Auto agitator", "Cools to 4°C within 3hrs"],
-  }
+    price: "₹1,85,000",
+    specs: [
+      "Direct expansion cooling",
+      "Auto agitator",
+      "Cools to 4°C within 3hrs",
+      "Ideal for small cooperatives",
+      "AMC service available",
+    ],
+    description:
+      "Ideal for individual farmers and small dairy cooperatives scaling up milk production.",
+  },
 ];
 
 export const SERVICES = [
   {
     title: "Genuine Sales",
-    desc: "Whether you buy a GreenRider or .., Every machine ships with a valid manufacturer warranty — no grey-market risk.",
-    icon: "tag"
+    desc: "Whether you buy a GreenRider or an authorized brand, every machine ships with a valid manufacturer warranty — no grey-market risk.",
+    icon: "tag",
   },
   {
     title: "Expert Repairs",
     desc: "When the rain hits, you can't wait days for a mechanic. Our factory-trained engineers prioritize emergency field repairs to save your season.",
-    icon: "wrench"
+    icon: "wrench",
   },
   {
     title: "Spare Parts Hub",
     desc: "Deep on-shelf stock of genuine spares — belts, blades, pistons, filters. No multi-week wait for a part.",
-    icon: "settings"
+    icon: "settings",
   },
   {
     title: "Govt. Subsidy",
-    desc: "Don't let complex paperwork stop you from claiming your rightful  subsidy money. We prepare, submit, and fight for your file.",
-    icon: "file"
-  }
+    desc: "Don't let complex paperwork stop you from claiming your rightful subsidy money. We prepare, submit, and fight for your file.",
+    icon: "file",
+  },
 ];
 
 export const STATS = [
@@ -109,9 +213,10 @@ export const STATS = [
 
 export const OWNER = {
   name: "Mr. Purushotham",
-  role: "Founder, Son of a Farmer", 
+  role: "Founder, Son of a Farmer",
   image: "/owner.png",
-  message: "Namaskara. Farming is not just a business for us; it is our heritage. I have seen farmers lose entire yields because a cheap machine broke down right when the rains started. I built GreenRider to end that tension. When you take a machine from my showroom, you don't just get metal and an engine—you get my personal guarantee. You do the hard work in the field; leave the machine's tension to me.",
+  message:
+    "Namaskara. Farming is not just a business for us; it is our heritage. I have seen farmers lose entire yields because a cheap machine broke down right when the rains started. I built GreenRider to end that tension. When you take a machine from my showroom, you don't just get metal and an engine — you get my personal guarantee. You do the hard work in the field; leave the machine's tension to me.",
   experience: "Standing by Farmers Since 2017",
-  signature: "My Word. Your Yield."
+  signature: "My Word. Your Yield.",
 };
