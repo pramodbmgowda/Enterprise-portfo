@@ -1,154 +1,146 @@
 "use client";
-import { useState, useEffect } from 'react';
-import { Menu, X, Phone } from 'lucide-react';
-import Link from 'next/link';
-import { SITE_CONFIG } from '@/data/inventory';
+
+import { useState, useEffect } from "react";
+import Link from "next/link";
+import { Menu, X, Phone, MessageCircle } from "lucide-react";
+import { SITE_CONFIG } from "@/data/inventory";
 
 export function Navbar() {
-  const [isScrolled, setIsScrolled] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
 
-  useEffect(() => {
-    const handleScroll = () => setIsScrolled(window.scrollY > 50);
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
-
-  // Prevent body scroll when menu is open
+  // Lock the background scroll when the menu is open
   useEffect(() => {
     if (isOpen) {
-      document.body.style.overflow = 'hidden';
+      document.body.style.overflow = "hidden";
     } else {
-      document.body.style.overflow = '';
+      document.body.style.overflow = "";
     }
-    return () => { document.body.style.overflow = ''; };
+    return () => {
+      document.body.style.overflow = "";
+    };
   }, [isOpen]);
 
+  const waNumber = SITE_CONFIG?.phone?.replace(/\D/g, "") || "919844107053";
+  const waMessage = encodeURIComponent("Hello GreenRider, I am interested in your machinery.");
+
   const navLinks = [
-    { name: 'Home', href: '#home' },
-    { name: 'Inventory', href: '#inventory' },
-    { name: 'Brands', href: '#brands' },
-    { name: 'Services', href: '#features' },
-    { name: 'Contact', href: '#contact' },
+    { label: "Home", href: "/" },
+    { label: "Inventory", href: "/#inventory" },
+    { label: "Brands", href: "/#brands" },
+    { label: "Services", href: "/#services" },
+    { label: "Contact", href: "/#contact" },
   ];
 
   return (
-    <nav className={`fixed w-full z-50 transition-all duration-300 ${
-      isScrolled
-        ? 'bg-slate-950/90 backdrop-blur-md py-3 shadow-2xl shadow-slate-950/50'
-        : 'bg-transparent py-5'
-    }`}>
-      <div className="mx-auto max-w-screen-2xl w-full px-6 sm:px-8 lg:px-12 xl:px-16 flex justify-between items-center">
-
-        {/* LOGO */}
-        <Link href="/" className="group flex flex-col leading-tight">
-          <div className="flex items-baseline gap-1">
-            <span className="text-xl lg:text-2xl font-black text-white uppercase tracking-tighter group-hover:text-emerald-500 transition-colors">
-              Green
+    <>
+      {/* Desktop & Mobile Top Bar */}
+      <header className="fixed top-0 left-0 right-0 z-40 border-b border-white/10 bg-slate-950/80 backdrop-blur-md">
+        {/* CRITICAL FIX: Container classes now perfectly match the Hero section */}
+        <div className="mx-auto flex h-20 max-w-screen-2xl w-full items-center justify-between px-6 sm:px-8 lg:px-12 xl:px-16">
+          
+          {/* Logo */}
+          <Link href="/" className="flex flex-col z-50 relative">
+            <span className="text-xl font-black uppercase tracking-widest text-white leading-none">
+              Green<span className="text-emerald-500">Rider</span>
             </span>
-            <span className="text-xl lg:text-2xl font-black text-emerald-500 uppercase tracking-tighter group-hover:text-white transition-colors">
-              Rider
+            <span className="text-[9px] font-bold uppercase tracking-[0.3em] text-slate-500 mt-1">
+              Enterprises
             </span>
-          </div>
-          <span className="text-[10px] font-extrabold text-slate-400 tracking-[0.2em] uppercase mt-0.5">
-            Enterprises
-          </span>
-        </Link>
+          </Link>
 
-        {/* Desktop Navigation */}
-        <div className="hidden lg:flex items-center gap-10">
-          <div className="flex gap-8">
-            {navLinks.map((item) => (
+          {/* Desktop Nav */}
+          <nav className="hidden md:flex items-center gap-8">
+            {navLinks.map((link) => (
               <Link
-                key={item.name}
-                href={item.href}
-                className="relative group text-sm font-bold text-slate-300 uppercase tracking-widest transition-colors hover:text-white"
+                key={link.label}
+                href={link.href}
+                className="text-xs font-bold uppercase tracking-[0.15em] text-slate-300 transition-colors hover:text-emerald-400"
               >
-                {item.name}
-                <span className="absolute -bottom-2 left-0 w-0 h-0.5 bg-emerald-500 transition-all duration-300 group-hover:w-full" />
+                {link.label}
               </Link>
             ))}
-          </div>
-          <div className="pl-6 border-l border-white/10">
             <a
-              href={`tel:${SITE_CONFIG.phone.replace(/[^0-9+]/g, '')}`}
-              className="flex items-center gap-2 bg-emerald-600 hover:bg-emerald-500 text-white px-6 py-2.5 rounded-sm font-bold text-xs uppercase tracking-widest transition-all hover:-translate-y-0.5"
+              href="#contact"
+              className="ml-4 rounded-sm bg-emerald-600 px-6 py-2.5 text-xs font-bold uppercase tracking-widest text-white transition-all hover:bg-emerald-500"
             >
-              <Phone size={15} fill="currentColor" />
-              <span>Call Support</span>
+              Get Quote
             </a>
-          </div>
+          </nav>
+
+          {/* Mobile Menu Trigger */}
+          <button
+            onClick={() => setIsOpen(true)}
+            className="p-2 text-white md:hidden"
+            aria-label="Open Menu"
+          >
+            <Menu size={28} />
+          </button>
+        </div>
+      </header>
+
+      {/* Backdrop (Click to close) */}
+      <div 
+        className={`fixed inset-0 z-50 bg-black/60 backdrop-blur-sm transition-opacity duration-300 md:hidden ${
+          isOpen ? "opacity-100" : "opacity-0 pointer-events-none"
+        }`}
+        onClick={() => setIsOpen(false)}
+      />
+
+      {/* Sliding Drawer */}
+      <div 
+        className={`fixed right-0 top-0 bottom-0 z-[60] h-[100dvh] w-[85%] max-w-sm bg-slate-950 border-l border-white/10 flex flex-col shadow-2xl transition-transform duration-300 ease-in-out md:hidden ${
+          isOpen ? "translate-x-0" : "translate-x-full"
+        }`}
+      >
+        {/* Mobile Menu Header */}
+        <div className="flex h-20 items-center justify-between border-b border-white/10 px-6">
+          <span className="text-lg font-black uppercase tracking-widest text-white">
+            Green<span className="text-emerald-500">Rider</span>
+          </span>
+          <button
+            onClick={() => setIsOpen(false)}
+            className="p-2 text-slate-400 hover:text-white transition-colors"
+            aria-label="Close Menu"
+          >
+            <X size={24} />
+          </button>
         </div>
 
-        {/* Mobile toggle */}
-        <button
-          onClick={() => setIsOpen(!isOpen)}
-          className="lg:hidden text-white p-2 hover:bg-white/10 rounded-sm transition-colors"
-          aria-label="Toggle menu"
-        >
-          {isOpen ? <X size={26} /> : <Menu size={26} />}
-        </button>
+        {/* Mobile Links */}
+        <div className="flex-1 overflow-y-auto px-6 py-8 flex flex-col gap-6">
+          {navLinks.map((link) => (
+            <Link
+              key={link.label}
+              href={link.href}
+              onClick={() => setIsOpen(false)}
+              className="text-lg font-bold uppercase tracking-widest text-slate-300 transition-colors hover:text-emerald-400"
+            >
+              {link.label}
+            </Link>
+          ))}
+        </div>
+
+        {/* Mobile Action Buttons */}
+        <div className="border-t border-white/10 p-6 flex flex-col gap-3 bg-slate-900/50 pb-safe">
+          <a
+            href={`tel:${SITE_CONFIG?.phone?.replace(/[^0-9+]/g, "") || "+919844107053"}`}
+            className="flex w-full items-center justify-center gap-3 rounded-sm bg-emerald-600 py-4 text-xs font-black uppercase tracking-widest text-white transition-colors hover:bg-emerald-500"
+          >
+            <Phone size={16} />
+            Call Now
+          </a>
+          
+          <a
+            href={`https://wa.me/${waNumber}?text=${waMessage}`}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex w-full items-center justify-center gap-3 rounded-sm bg-[#25D366] py-4 text-xs font-black uppercase tracking-widest text-white transition-colors hover:bg-[#20bd5a]"
+          >
+            <MessageCircle size={16} />
+            WhatsApp Us
+          </a>
+        </div>
       </div>
-
-      {/* Mobile Menu */}
-      {isOpen && (
-        <>
-          {/* Backdrop — tap to close */}
-          <div
-            className="fixed inset-0 bg-black/60 z-40 lg:hidden"
-            onClick={() => setIsOpen(false)}
-          />
-
-          {/* Drawer */}
-          <div className="fixed top-0 right-0 h-full w-[80vw] max-w-sm bg-slate-950 border-l border-slate-800 z-50 flex flex-col lg:hidden shadow-2xl">
-            {/* Header */}
-            <div className="flex items-center justify-between px-6 py-5 border-b border-slate-800">
-              <div className="flex items-baseline gap-1">
-                <span className="text-lg font-black text-white uppercase">Green</span>
-                <span className="text-lg font-black text-emerald-500 uppercase">Rider</span>
-              </div>
-              <button
-                onClick={() => setIsOpen(false)}
-                className="p-2 text-slate-400 hover:text-white transition-colors"
-              >
-                <X size={22} />
-              </button>
-            </div>
-
-            {/* Links */}
-            <div className="flex flex-col flex-1 overflow-y-auto px-6 py-8 gap-1">
-              {navLinks.map((item) => (
-                <Link
-                  key={item.name}
-                  href={item.href}
-                  onClick={() => setIsOpen(false)}
-                  className="text-base font-bold text-slate-300 uppercase tracking-widest py-4 border-b border-slate-800/50 active:text-emerald-400 transition-colors"
-                >
-                  {item.name}
-                </Link>
-              ))}
-            </div>
-
-            {/* Bottom CTA */}
-            <div className="p-6 border-t border-slate-800 flex flex-col gap-3">
-              <a
-                href={`tel:${SITE_CONFIG.phone.replace(/[^0-9+]/g, '')}`}
-                className="flex items-center justify-center gap-2 bg-emerald-600 text-white py-4 font-black uppercase tracking-widest rounded-sm text-sm"
-              >
-                <Phone size={16} fill="currentColor" /> Call Now
-              </a>
-              <a
-                href={`https://wa.me/${SITE_CONFIG.phone.replace(/[^0-9]/g, '')}?text=${encodeURIComponent('Namaskara, I am interested in your machines.')}`}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex items-center justify-center gap-2 bg-[#25D366] text-white py-4 font-black uppercase tracking-widest rounded-sm text-sm"
-              >
-                WhatsApp Us
-              </a>
-            </div>
-          </div>
-        </>
-      )}
-    </nav>
+    </>
   );
 }

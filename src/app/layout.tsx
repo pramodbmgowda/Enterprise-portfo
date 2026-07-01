@@ -2,6 +2,11 @@ import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
 import './globals.css';
 
+// Import global UI components
+import { Navbar } from "@/components/layout/Navbar";
+import { Footer } from "@/components/layout/Footer";
+import { FloatingActions } from "@/components/ui/FloatingActions";
+
 const inter = Inter({ subsets: ['latin'] });
 
 const jsonLd = {
@@ -120,11 +125,24 @@ export default function RootLayout({
       <body
         className={`${inter.className} bg-slate-950 text-slate-100 antialiased`}
       >
+        {/* Schema.org JSON-LD for Local SEO */}
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
+        
+        {/* Global Navigation */}
+        <Navbar />
+        
+        {/* Main Page Content */}
         {children}
+        
+        {/* Global Footer */}
+        <Footer />
+        
+        {/* Floating Action Buttons (WhatsApp & Map Scroll) */}
+        <FloatingActions />
+        
       </body>
     </html>
   );

@@ -3,7 +3,7 @@
 import { motion } from "framer-motion";
 import { ArrowRight, Phone } from "lucide-react";
 import Image from "next/image";
-import { STATS, SITE_CONFIG } from "@/data/inventory";
+import { SITE_CONFIG } from "@/data/inventory";
 
 export function Hero() {
   return (
@@ -67,23 +67,6 @@ export function Hero() {
               <Phone size={18} />
               Call Sales Direct
             </a>
-          </div>
-
-          <div className="grid grid-cols-2 gap-3 sm:gap-5 mt-12 sm:mt-16 max-w-xl">
-            {STATS.slice(0, 2).map((stat, index) => (
-              <motion.div
-                key={index}
-                whileHover={{ y: -4 }}
-                className="rounded-2xl border border-white/10 bg-white/5 backdrop-blur-md p-4 sm:p-6"
-              >
-                <h2 className="text-3xl sm:text-4xl font-black text-white">
-                  {stat.value}
-                </h2>
-                <p className="mt-2 uppercase tracking-[0.05em] sm:tracking-[0.2em] text-[10px] sm:text-xs text-slate-400 leading-snug">
-                  {stat.label}
-                </p>
-              </motion.div>
-            ))}
           </div>
         </motion.div>
       </div>
