@@ -134,13 +134,16 @@ export default function RootLayout({
         {/* Global Navigation */}
         <Navbar />
         
-        {/* Main Page Content */}
-        {children}
+        {/* THE FIX: Strict horizontal clipping wrapper */}
+        {/* This ensures no background glows or animations can stretch the mobile screen */}
+        <main className="relative w-full max-w-full overflow-x-hidden">
+          {children}
+        </main>
         
         {/* Global Footer */}
         <Footer />
         
-        {/* Floating Action Buttons (WhatsApp & Map Scroll) */}
+        {/* Floating Action Buttons */}
         <FloatingActions />
         
       </body>

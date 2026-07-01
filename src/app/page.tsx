@@ -7,9 +7,7 @@ import { Services } from '@/components/sections/Services';
 import { BentoGrid } from '@/components/sections/BentoGrid';
 import { Owner } from '@/components/sections/Owner';
 import { LeadCapture } from '@/components/sections/LeadCapture';
-import { Footer } from '@/components/layout/Footer';
 import { FloatingActions } from '@/components/ui/FloatingActions';
-
 
 export default function Home() {
   return (
@@ -20,10 +18,8 @@ export default function Home() {
       <OurBrand />
       <Services />
       <BentoGrid />
-
       <Owner />
       <LeadCapture />
-      <Footer />
       <FloatingActions />
     </main>
   );
