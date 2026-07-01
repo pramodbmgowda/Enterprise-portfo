@@ -68,6 +68,21 @@ export function Hero() {
               Call Sales Direct
             </a>
           </div>
+
+          {/* Stat */}
+          <motion.div
+            initial={{ opacity: 0, y: 15 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.7, delay: 0.2 }}
+            className="mt-10 flex items-center gap-3"
+          >
+            <span className="text-3xl md:text-4xl font-black text-white">
+              5000+
+            </span>
+            <span className="text-sm text-slate-300 uppercase tracking-widest leading-tight max-w-[120px]">
+              Farmers Served
+            </span>
+          </motion.div>
         </motion.div>
       </div>
     </section>
