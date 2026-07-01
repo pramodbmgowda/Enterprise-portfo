@@ -23,13 +23,8 @@ export function Hero() {
           className="object-cover object-center scale-105"
         />
 
-        {/* Dark Overlay */}
         <div className="absolute inset-0 bg-slate-950/55" />
-
-        {/* Premium Gradient */}
         <div className="absolute inset-0 bg-gradient-to-r from-slate-950 via-slate-950/70 to-transparent" />
-
-        {/* Radial Highlight */}
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(16,185,129,.18),transparent_45%)]" />
       </div>
 
@@ -54,9 +49,9 @@ export function Hero() {
 
           {/* Description */}
           <p className="mt-8 text-lg md:text-xl text-slate-300 leading-8 max-w-2xl">
-            Stop losing yields to cheap machinery breakdowns. We deliver robust
-            agricultural equipment with a personal guarantee of zero tension
-            and immediate on-ground support.
+            Stop losing yields to cheap machinery breakdowns. We deliver
+            robust agricultural equipment with a personal guarantee of zero
+            tension and immediate on-ground support.
           </p>
 
           {/* Buttons */}
@@ -79,22 +74,23 @@ export function Hero() {
           </div>
 
           {/* Stats */}
-          <div className="grid grid-cols-2 gap-5 mt-16 max-w-xl">
-  {STATS.slice(0, 2).map((stat, index) => (
-    <motion.div
-      key={index}
-      whileHover={{ y: -4 }}
-      className="rounded-2xl border border-white/10 bg-white/5 backdrop-blur-md p-6"
-    >
-      <h2 className="text-4xl font-black text-white">
-        {stat.value}
-      </h2>
-      <p className="mt-2 uppercase tracking-[0.2em] text-xs text-slate-400 whitespace-nowrap">
-        {stat.label}
-      </p>
-    </motion.div>
-  ))}
-</div>
+          <div className="grid grid-cols-2 gap-3 sm:gap-5 mt-12 sm:mt-16 max-w-xl">
+            {STATS.slice(0, 2).map((stat, index) => (
+              <motion.div
+                key={index}
+                whileHover={{ y: -4 }}
+                className="rounded-2xl border border-white/10 bg-white/5 backdrop-blur-md p-4 sm:p-6"
+              >
+                <h2 className="text-3xl sm:text-4xl font-black text-white">
+                  {stat.value}
+                </h2>
+
+                <p className="mt-2 uppercase tracking-[0.05em] sm:tracking-[0.2em] text-[10px] sm:text-xs text-slate-400 leading-snug">
+                  {stat.label}
+                </p>
+              </motion.div>
+            ))}
+          </div>
         </motion.div>
       </div>
     </section>
