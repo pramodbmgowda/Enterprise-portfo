@@ -39,7 +39,7 @@ export function OurBrand() {
             <div className="flex items-center gap-4 mb-8">
               <div className="h-[1px] w-12 bg-emerald-500" />
               <span className="text-emerald-400 font-bold uppercase tracking-[0.2em] text-[10px]">
-                Original Equipment Manufacturer
+                GREENRIDER Original's 
               </span>
             </div>
             <h2 className="text-4xl sm:text-5xl lg:text-6xl font-black uppercase tracking-tight leading-[0.9]">

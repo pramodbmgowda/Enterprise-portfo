@@ -3,6 +3,7 @@
 import { OWNER, SITE_CONFIG } from "@/data/inventory";
 import { Phone, Quote } from "lucide-react";
 import { motion } from "framer-motion";
+import Image from "next/image";
 
 export function Owner() {
   return (
@@ -17,7 +18,7 @@ export function Owner() {
           className="max-w-4xl mx-auto rounded-xl border border-white/10 bg-white/[0.03] overflow-hidden flex flex-col md:flex-row shadow-2xl"
         >
           
-          {/* Text Side (Left on desktop, Bottom on mobile) */}
+          {/* Text Side */}
           <div className="md:w-3/5 p-8 md:p-10 flex flex-col justify-center relative order-2 md:order-1">
             {/* Decorative Quote Icon */}
             <Quote size={60} className="text-white/5 absolute top-6 left-6" />
@@ -43,18 +44,22 @@ export function Owner() {
             </div>
           </div>
 
-          {/* Image Side (Right on desktop, Top on mobile) */}
+          {/* Image Side */}
           <div className="md:w-2/5 relative bg-gradient-to-br from-slate-900 to-slate-950 flex items-center justify-center py-12 md:py-0 order-1 md:order-2 border-b md:border-b-0 md:border-l border-white/5 min-h-[300px]">
              {/* Subtle lighting glow behind the circular image */}
              <div className="absolute w-48 h-48 bg-emerald-500/10 blur-3xl rounded-full" />
              
              {/* Premium Circular Avatar Wrapper */}
-             <div className="relative z-10 w-48 h-48 md:w-56 md:h-56 rounded-full p-1 bg-gradient-to-br from-emerald-500/40 to-slate-800 shadow-2xl">
-               <img
-                src={OWNER.image}
-                alt={OWNER.name}
-                className="w-full h-full object-cover object-top rounded-full bg-slate-900 border-4 border-slate-950"
-               />
+             <div className="relative z-10 w-48 h-48 md:w-56 md:h-56 rounded-full p-1 bg-gradient-to-br from-emerald-500/40 to-slate-800 shadow-2xl overflow-hidden">
+               <div className="relative w-full h-full rounded-full border-4 border-slate-950 bg-slate-900 overflow-hidden">
+                 <Image
+                  src={OWNER.image}
+                  alt={OWNER.name}
+                  fill
+                  sizes="(max-width: 768px) 192px, 224px"
+                  className="object-cover object-top"
+                 />
+               </div>
              </div>
           </div>
 

@@ -1,65 +1,49 @@
-"use client";
-import { useState, useEffect } from 'react'; // 1. Add these hooks
-import { SITE_CONFIG } from '@/data/inventory';
-import { ArrowUp, Phone, MapPin } from 'lucide-react';
+import { SITE_CONFIG } from "@/data/inventory";
 
 export function Footer() {
-  const [showTopBtn, setShowTopBtn] = useState(false); // 2. Add state
-
-  useEffect(() => {
-    // 3. Add scroll listener to detect position
-    const toggleVisibility = () => {
-      if (window.scrollY > 400) {
-        setShowTopBtn(true);
-      } else {
-        setShowTopBtn(false);
-      }
-    };
-    window.addEventListener('scroll', toggleVisibility);
-    return () => window.removeEventListener('scroll', toggleVisibility);
-  }, []);
-
-  const scrollToTop = () => {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-  };
-
   return (
-    <footer className="bg-slate-950 py-12 border-t border-white/5 relative">
-      <div className="container mx-auto px-4 flex flex-col md:flex-row justify-between items-center gap-8">
-        
-        {/* Brand */}
-        <div className="text-center md:text-left">
-          <h4 className="font-black text-xl uppercase tracking-tighter text-white mb-2">
-            Green<span className="text-emerald-500">Rider</span>
-          </h4>
-          <p className="text-slate-600 text-[10px] uppercase tracking-widest font-bold">
-            © 2026 GreenRider Manufacturing. All Rights Reserved.
-          </p>
+    <footer className="bg-slate-950 border-t border-white/10 pt-16 pb-8">
+      <div className="container mx-auto px-4 max-w-7xl">
+        <div className="grid md:grid-cols-4 gap-12 mb-16">
+          {/* Brand Info */}
+       <div className="col-span-2 md:col-span-1">
+  <h4 className="font-black text-xl mb-4">
+    <span className="text-white">GREEN</span>
+    <span className="text-emerald-500">RIDER</span>
+  </h4>
+  <p className="text-slate-500 text-xs leading-relaxed">
+    Authorized OEM Dealer & Service Center for agricultural automation.
+  </p>
+</div>
+          
+          {/* Legal/Links */}
+          <div>
+            <h5 className="text-white font-bold text-xs uppercase tracking-widest mb-4">Company</h5>
+            <ul className="space-y-3 text-slate-500 text-xs">
+              <li><a href="/privacy" className="hover:text-emerald-500">Privacy Policy</a></li>
+              <li><a href="/terms" className="hover:text-emerald-500">Terms of Service</a></li>
+            </ul>
+          </div>
+          
+          {/* Contact */}
+          <div>
+            <h5 className="text-white font-bold text-xs uppercase tracking-widest mb-4">HQ</h5>
+            <p className="text-slate-500 text-xs leading-relaxed">{SITE_CONFIG.address}</p>
+          </div>
+
+          {/* Compliance Badge */}
+          <div className="bg-white/5 p-4 rounded border border-white/10">
+            <p className="text-[10px] text-slate-400 uppercase tracking-widest mb-1">GST Registration</p>
+            <p className="text-white font-mono text-sm">29AAAAA0000A1Z5</p>
+            <p className="text-[9px] text-slate-600 mt-2">Verified Business Entity</p>
+          </div>
         </div>
 
-        {/* Quick Contact */}
-        <div className="flex flex-col sm:flex-row items-center gap-4 text-slate-400 text-xs">
-          <a href={`tel:${SITE_CONFIG.phone}`} className="flex items-center gap-2 hover:text-emerald-400 transition-colors">
-            <Phone size={14} /> {SITE_CONFIG.phone}
-          </a>
-          <span className="hidden sm:inline text-slate-700">|</span>
-          <span className="flex items-center gap-2">
-            <MapPin size={14} /> {SITE_CONFIG.address}
-          </span>
+        {/* Copyright */}
+        <div className="border-t border-white/10 pt-8 flex flex-col md:flex-row justify-between gap-4 text-[10px] text-slate-600 uppercase tracking-widest">
+          <p>© 2026 GreenRider Industries. All Rights Reserved.</p>
+          <p>AUTHORIZED DEALER · KARNATAKA, INDIA</p>
         </div>
-
-        {/* 4. Conditional Rendering for Back to Top */}
-        {showTopBtn && (
-          <button
-            onClick={scrollToTop}
-            className="group flex items-center gap-2 text-[10px] font-bold uppercase tracking-widest text-slate-500 hover:text-emerald-500 transition-colors"
-          >
-            Back to Top
-            <div className="p-2 bg-slate-900 border border-white/10 rounded-full group-hover:border-emerald-500/50 transition-colors">
-              <ArrowUp size={14} />
-            </div>
-          </button>
-        )}
       </div>
     </footer>
   );

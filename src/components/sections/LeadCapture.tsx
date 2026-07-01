@@ -1,8 +1,9 @@
 "use client";
 
-import { Phone, MapPin, ChevronDown, CheckCircle2, Loader2 } from "lucide-react";
+import { Phone, MapPin, ChevronDown, CheckCircle2, Loader2, ShieldCheck } from "lucide-react";
 import { useState } from "react";
 import { SITE_CONFIG } from "@/data/inventory";
+import { motion } from "framer-motion";
 
 export function LeadCapture() {
   const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
@@ -17,98 +18,269 @@ export function LeadCapture() {
       category: (form.elements.namedItem("category") as HTMLSelectElement).value,
       message: (form.elements.namedItem("message") as HTMLTextAreaElement).value,
     };
-
     try {
       const res = await fetch("/api/enquiry", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(data),
       });
-      if (res.ok) { setStatus("success"); form.reset(); } 
+      if (res.ok) { setStatus("success"); form.reset(); }
       else { setStatus("error"); }
     } catch { setStatus("error"); }
   }
 
   return (
-    <section id="contact" className="relative py-32 bg-slate-950 text-white border-t border-white/10">
-      <div className="container mx-auto px-4 max-w-7xl">
-        
-        {/* Architectural Main Grid */}
-        <div className="grid lg:grid-cols-12 border border-white/10">
+    <section id="contact" className="relative py-24 md:py-32 bg-slate-950 text-white border-t border-white/5">
+      {/* Background glow */}
+      <div className="absolute inset-0 -z-10">
+        <div className="absolute -top-1/3 -left-1/4 w-[600px] h-[600px] bg-emerald-500/5 rounded-full blur-[140px]" />
+        <div className="absolute bottom-0 right-0 w-[400px] h-[400px] bg-emerald-500/5 rounded-full blur-[120px]" />
+      </div>
 
-          {/* LEFT: INFO BLOCK */}
-          <div className="lg:col-span-5 p-10 md:p-16 border-b lg:border-b-0 lg:border-r border-white/10 flex flex-col justify-between bg-white/[0.02]">
-            <div>
-              <div className="flex items-center gap-4 mb-12">
-                <div className="w-1.5 h-1.5 bg-emerald-500" />
-                <span className="text-emerald-400 font-bold uppercase tracking-[0.2em] text-[10px]">
-                  Direct Procurement
-                </span>
+      <div className="container mx-auto px-4">
+
+        {/* SECTION HEADER */}
+        <motion.div
+          initial={{ opacity: 0, y: 16 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5 }}
+          className="mb-14"
+        >
+          <span className="text-emerald-400 font-bold uppercase tracking-widest text-xs mb-3 block">
+            Get In Touch
+          </span>
+          <h2 className="text-3xl md:text-5xl font-black uppercase tracking-tight">
+            Request a{" "}
+            <span className="bg-clip-text text-transparent bg-gradient-to-r from-emerald-300 to-emerald-500">
+              Quotation
+            </span>
+          </h2>
+        </motion.div>
+
+        <div className="grid lg:grid-cols-5 gap-8 items-stretch">
+
+          {/* LEFT COLUMN */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5, delay: 0.05 }}
+            className="lg:col-span-2 flex flex-col gap-6"
+          >
+            {/* Info card */}
+            <div className="rounded-2xl border border-white/10 bg-white/[0.02] p-8 flex flex-col gap-8">
+              <div>
+                <div className="inline-flex items-center gap-2 mb-4 px-3 py-1.5 rounded-sm border border-emerald-400/20 bg-emerald-950/40">
+                  <ShieldCheck size={12} className="text-emerald-400" />
+                  <span className="text-[10px] uppercase tracking-widest font-bold text-emerald-300">
+                    Official Pricing Request
+                  </span>
+                </div>
+                <p className="text-slate-400 text-sm leading-relaxed">
+                  Get accurate pricing, subsidy guidance, and stock availability directly from our sales team. No middleman, no delay.
+                </p>
               </div>
-              <h3 className="text-4xl md:text-5xl font-black uppercase leading-[0.9] mb-8">
-                Request <br />
-                <span className="text-slate-600">Quotation</span>
-              </h3>
-              <p className="text-slate-400 text-sm leading-relaxed max-w-sm">
-                Accurate pricing, subsidy documentation, and technical specs provided directly by our engineering sales team.
-              </p>
+
+              <div className="space-y-5 pt-2 border-t border-white/5">
+                <div className="flex gap-4 items-start">
+                  <div className="p-2.5 rounded-lg bg-emerald-950/50 border border-emerald-500/15 flex-shrink-0">
+                    <MapPin size={15} className="text-emerald-400" strokeWidth={1.5} />
+                  </div>
+                  <div>
+                    <p className="text-[10px] uppercase tracking-widest font-bold text-slate-500 mb-1">
+                      Showroom
+                    </p>
+                    <p className="text-slate-300 text-xs leading-relaxed">
+                      {SITE_CONFIG.address}
+                    </p>
+                  </div>
+                </div>
+
+                <div className="flex gap-4 items-start">
+                  <div className="p-2.5 rounded-lg bg-emerald-950/50 border border-emerald-500/15 flex-shrink-0">
+                    <Phone size={15} className="text-emerald-400" strokeWidth={1.5} />
+                  </div>
+                  <div>
+                    <p className="text-[10px] uppercase tracking-widest font-bold text-slate-500 mb-1">
+                      Sales Line
+                    </p>
+                    <a
+                      href={`tel:${SITE_CONFIG.phone.replace(/[^0-9+]/g, "")}`}
+                      className="text-emerald-400 text-sm font-mono font-bold hover:text-emerald-300 transition-colors"
+                    >
+                      {SITE_CONFIG.phone}
+                    </a>
+                  </div>
+                </div>
+              </div>
             </div>
 
-            <div className="mt-16 space-y-8">
-              <div className="flex gap-6 items-start">
-                <MapPin className="text-emerald-500 shrink-0" size={18} strokeWidth={1.5} />
-                <p className="text-xs text-slate-500 leading-relaxed uppercase tracking-widest">{SITE_CONFIG.address}</p>
+            {/* MAP CARD */}
+            <div className="rounded-2xl border border-white/10 overflow-hidden relative flex-1 min-h-[240px] group">
+              <iframe
+                src="https://maps.google.com/maps?q=12.950889,77.115981&z=18&output=embed"
+                width="100%"
+                height="100%"
+                style={{ border: 0 }}
+                allowFullScreen
+                loading="lazy"
+                referrerPolicy="strict-origin-when-cross-origin"
+                className="absolute inset-0 w-full h-full filter grayscale contrast-125 opacity-60 group-hover:opacity-90 transition-opacity duration-500"
+              />
+              {/* Scanline */}
+              <div
+                className="absolute inset-0 pointer-events-none opacity-20"
+                style={{
+                  backgroundImage:
+                    "repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(0,0,0,0.2) 2px, rgba(0,0,0,0.2) 4px)",
+                }}
+              />
+              {/* Label */}
+              <div className="absolute bottom-0 left-0 right-0 px-4 py-3 bg-gradient-to-t from-slate-950 via-slate-950/80 to-transparent pointer-events-none">
+                <p className="text-[10px] font-bold uppercase tracking-widest text-emerald-400">
+                  Senthepete, Bettahalli, Hutridurga · Kunigal
+                </p>
               </div>
-              <div className="flex gap-6 items-start">
-                <Phone className="text-emerald-500 shrink-0" size={18} strokeWidth={1.5} />
-                <p className="text-xs text-slate-500 font-mono tracking-widest">{SITE_CONFIG.phone}</p>
-              </div>
+              {/* Tap overlay */}
+              <a
+                href="https://maps.google.com/?q=12.950889,77.115981"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="absolute inset-0 z-10"
+                aria-label="Open in Google Maps"
+              />
             </div>
-          </div>
+          </motion.div>
 
-          {/* RIGHT: FORM */}
-          <div className="lg:col-span-7 p-10 md:p-16">
+          {/* RIGHT COLUMN — FORM */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5, delay: 0.1 }}
+            className="lg:col-span-3 rounded-2xl border border-white/10 bg-white/[0.02] p-8 md:p-12"
+          >
             {status === "success" ? (
-              <div className="h-full flex flex-col items-center justify-center text-center py-20">
-                <CheckCircle2 size={48} className="text-emerald-500 mb-6" strokeWidth={1} />
-                <h4 className="text-lg font-black uppercase tracking-widest">Enquiry Lodged</h4>
-                <p className="text-slate-500 text-sm mt-2">A technical consultant will call you shortly.</p>
+              <div className="h-full flex flex-col items-center justify-center text-center py-16 gap-5">
+                <div className="w-16 h-16 rounded-full border border-emerald-500/30 bg-emerald-950/50 flex items-center justify-center">
+                  <CheckCircle2 size={30} className="text-emerald-400" strokeWidth={1.5} />
+                </div>
+                <div>
+                  <h4 className="text-lg font-black uppercase tracking-widest text-white mb-2">
+                    Enquiry Received
+                  </h4>
+                  <p className="text-slate-500 text-sm max-w-xs leading-relaxed">
+                    Our team will call you within a few hours with pricing and availability.
+                  </p>
+                </div>
+                <button
+                  onClick={() => setStatus("idle")}
+                  className="text-[10px] font-bold uppercase tracking-widest text-emerald-400 hover:text-emerald-300 transition-colors mt-2"
+                >
+                  Submit another request →
+                </button>
               </div>
             ) : (
-              <form onSubmit={handleSubmit} className="space-y-8">
-                <div className="grid md:grid-cols-2 gap-8">
-                  <div>
-                    <label className="block text-[10px] font-bold uppercase tracking-[0.2em] text-slate-600 mb-3">Client Name</label>
-                    <input name="name" required className="w-full bg-transparent border-b border-white/20 p-2 text-sm focus:border-emerald-500 outline-none transition-colors" placeholder="NAME" />
+              <form onSubmit={handleSubmit} className="space-y-7">
+
+                <div className="grid md:grid-cols-2 gap-6">
+                  <div className="flex flex-col gap-2">
+                    <label className="text-[10px] font-bold uppercase tracking-[0.2em] text-slate-500">
+                      Client Name
+                    </label>
+                    <input
+                      name="name"
+                      required
+                      className="w-full bg-black/40 border border-white/10 rounded-sm px-4 py-3.5 text-sm text-white placeholder:text-slate-700 focus:border-emerald-500 focus:bg-black/60 outline-none transition-all"
+                      placeholder="Full Name"
+                    />
                   </div>
-                  <div>
-                    <label className="block text-[10px] font-bold uppercase tracking-[0.2em] text-slate-600 mb-3">Mobile</label>
-                    <input name="phone" required pattern="[0-9]{10}" className="w-full bg-transparent border-b border-white/20 p-2 text-sm font-mono focus:border-emerald-500 outline-none transition-colors" placeholder="9XXXXXXXXX" />
+                  <div className="flex flex-col gap-2">
+                    <label className="text-[10px] font-bold uppercase tracking-[0.2em] text-slate-500">
+                      Mobile Number
+                    </label>
+                    <div className="relative">
+                      <span className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-500 font-mono text-sm select-none">
+                        +91
+                      </span>
+                      <input
+                        name="phone"
+                        required
+                        pattern="[0-9]{10}"
+                        className="w-full bg-black/40 border border-white/10 rounded-sm px-4 pl-14 py-3.5 text-sm text-white font-mono placeholder:text-slate-700 focus:border-emerald-500 focus:bg-black/60 outline-none transition-all"
+                        placeholder="9XXXXXXXXX"
+                      />
+                    </div>
                   </div>
                 </div>
 
-                <div>
-                  <label className="block text-[10px] font-bold uppercase tracking-[0.2em] text-slate-600 mb-3">Equipment Category</label>
+                <div className="flex flex-col gap-2">
+                  <label className="text-[10px] font-bold uppercase tracking-[0.2em] text-slate-500">
+                    Equipment Category
+                  </label>
                   <div className="relative">
-                    <select name="category" required defaultValue="" className="w-full bg-transparent border-b border-white/20 p-2 text-sm outline-none appearance-none cursor-pointer">
-                      <option value="" disabled>SELECT FROM LIST</option>
-                      <option>Power Weeder / Tiller</option><option>Brush Cutter</option><option>Sprayer</option><option>Water Pump</option><option>Dairy Equipment</option>
+                    <select
+                      name="category"
+                      required
+                      defaultValue=""
+                      className="w-full bg-black/40 border border-white/10 rounded-sm px-4 py-3.5 text-sm text-white outline-none appearance-none cursor-pointer focus:border-emerald-500 focus:bg-black/60 transition-all"
+                    >
+                      <option value="" disabled className="bg-slate-950 text-slate-500">
+                        Select Equipment Type
+                      </option>
+                      <option className="bg-slate-950">Power Weeder / Tiller</option>
+                      <option className="bg-slate-950">Brush Cutter</option>
+                      <option className="bg-slate-950">Sprayer</option>
+                      <option className="bg-slate-950">Water Pump</option>
+                      <option className="bg-slate-950">Dairy Equipment</option>
+                      <option className="bg-slate-950">Other / Spare Parts</option>
                     </select>
-                    <ChevronDown size={14} className="absolute right-0 top-3 text-emerald-500" />
+                    <ChevronDown size={14} className="absolute right-4 top-1/2 -translate-y-1/2 text-emerald-500 pointer-events-none" />
                   </div>
                 </div>
 
-                <div>
-                  <label className="block text-[10px] font-bold uppercase tracking-[0.2em] text-slate-600 mb-3">Requirement Details</label>
-                  <textarea name="message" rows={3} className="w-full bg-transparent border-b border-white/20 p-2 text-sm focus:border-emerald-500 outline-none resize-none" placeholder="Subsidy, usage area, model preference..." />
+                <div className="flex flex-col gap-2">
+                  <label className="text-[10px] font-bold uppercase tracking-[0.2em] text-slate-500">
+                    Requirement Details
+                  </label>
+                  <textarea
+                    name="message"
+                    rows={4}
+                    className="w-full bg-black/40 border border-white/10 rounded-sm px-4 py-3.5 text-sm text-white placeholder:text-slate-700 focus:border-emerald-500 focus:bg-black/60 outline-none resize-none transition-all"
+                    placeholder="Subsidy details, model preference, usage area, quantity..."
+                  />
                 </div>
 
-                <button type="submit" disabled={status === "loading"} className="w-full border border-emerald-500 text-emerald-500 hover:bg-emerald-500 hover:text-white py-4 font-black uppercase tracking-[0.2em] text-[11px] transition-all flex items-center justify-center gap-3">
-                  {status === "loading" ? <Loader2 size={14} className="animate-spin" /> : "Submit Enquiry"}
+                {status === "error" && (
+                  <div className="px-4 py-3 rounded-sm border border-red-500/20 bg-red-950/20">
+                    <p className="text-red-400 text-xs font-bold uppercase tracking-widest">
+                      Submission failed — please call {SITE_CONFIG.phone} directly.
+                    </p>
+                  </div>
+                )}
+
+                <button
+                  type="submit"
+                  disabled={status === "loading"}
+                  className="w-full bg-emerald-600 hover:bg-emerald-500 disabled:opacity-50 disabled:cursor-not-allowed text-white py-4 font-black uppercase tracking-widest text-xs rounded-sm transition-all shadow-[0_0_30px_rgba(16,185,129,0.3)] hover:-translate-y-0.5 active:translate-y-0 flex items-center justify-center gap-2"
+                >
+                  {status === "loading" ? (
+                    <>
+                      <Loader2 size={14} className="animate-spin" /> Submitting...
+                    </>
+                  ) : (
+                    "Get Official Quote"
+                  )}
                 </button>
+
+                <p className="text-center text-[10px] text-slate-600 uppercase tracking-widest">
+                  No spam · Shared only with our sales team
+                </p>
               </form>
             )}
-          </div>
+          </motion.div>
+
         </div>
       </div>
     </section>

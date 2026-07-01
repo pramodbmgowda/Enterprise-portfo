@@ -1,7 +1,7 @@
 export const SITE_CONFIG = {
-  name: "GreenRider Enterprises",
+  name: "GreenRider",
   phone: "+91 9844107053",
-  email: "sales@greenrider.in",
+  email: "info@greenriderskb.com",
   address: "Bettahalli, Senthepete, Hutridurga, Kunigal, Karnataka",
 };
 
@@ -208,7 +208,7 @@ export const SERVICES = [
 export const STATS = [
   { label: "Authorized Brands", value: "25+" },
   { label: "Machines Sold", value: "15000+" },
-  { label: "Service Engineers", value: "18" },
+
 ];
 
 export const OWNER = {

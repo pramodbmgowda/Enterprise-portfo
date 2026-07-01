@@ -14,6 +14,16 @@ export function Navbar() {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  // Prevent body scroll when menu is open
+  useEffect(() => {
+    if (isOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = '';
+    }
+    return () => { document.body.style.overflow = ''; };
+  }, [isOpen]);
+
   const navLinks = [
     { name: 'Home', href: '#home' },
     { name: 'Inventory', href: '#inventory' },
@@ -24,7 +34,9 @@ export function Navbar() {
 
   return (
     <nav className={`fixed w-full z-50 transition-all duration-300 ${
-      isScrolled ? 'bg-slate-950/90 backdrop-blur-md py-3 shadow-2xl shadow-slate-950/50' : 'bg-transparent py-6'
+      isScrolled
+        ? 'bg-slate-950/90 backdrop-blur-md py-3 shadow-2xl shadow-slate-950/50'
+        : 'bg-transparent py-5'
     }`}>
       <div className="container mx-auto px-4 flex justify-between items-center">
 
@@ -38,8 +50,8 @@ export function Navbar() {
               Rider
             </span>
           </div>
-          <span className="text-[10px] font-extrabold text-slate-100 tracking-[0.25em] uppercase group-hover:text-emerald-400 transition-colors mt-0.5 ml-0.5 opacity-90">
-            Fire Your Imaginations
+          <span className="text-[10px] font-extrabold text-slate-400 tracking-[0.2em] uppercase mt-0.5">
+            Enterprises
           </span>
         </Link>
 
@@ -53,42 +65,89 @@ export function Navbar() {
                 className="relative group text-sm font-bold text-slate-300 uppercase tracking-widest transition-colors hover:text-white"
               >
                 {item.name}
-                <span className="absolute -bottom-2 left-0 w-0 h-0.5 bg-emerald-500 transition-all duration-300 group-hover:w-full box-border"></span>
+                <span className="absolute -bottom-2 left-0 w-0 h-0.5 bg-emerald-500 transition-all duration-300 group-hover:w-full" />
               </Link>
             ))}
           </div>
-
           <div className="pl-6 border-l border-white/10">
             <a
-              href={`tel:${SITE_CONFIG.phone}`}
-              className="flex items-center gap-3 bg-emerald-600 hover:bg-emerald-500 text-white px-6 py-2.5 rounded-sm font-bold text-xs uppercase tracking-widest transition-all shadow-lg shadow-emerald-900/20 hover:-translate-y-0.5 active:translate-y-0"
+              href={`tel:${SITE_CONFIG.phone.replace(/[^0-9+]/g, '')}`}
+              className="flex items-center gap-2 bg-emerald-600 hover:bg-emerald-500 text-white px-6 py-2.5 rounded-sm font-bold text-xs uppercase tracking-widest transition-all hover:-translate-y-0.5"
             >
-              <Phone size={16} fill="currentColor" /> <span>Call Support</span>
+              <Phone size={15} fill="currentColor" />
+              <span>Call Support</span>
             </a>
           </div>
         </div>
 
-        <button onClick={() => setIsOpen(!isOpen)} className="lg:hidden text-white p-2 hover:bg-white/10 rounded-sm transition-colors">
-          {isOpen ? <X size={28} /> : <Menu size={28} />}
+        {/* Mobile toggle */}
+        <button
+          onClick={() => setIsOpen(!isOpen)}
+          className="lg:hidden text-white p-2 hover:bg-white/10 rounded-sm transition-colors"
+          aria-label="Toggle menu"
+        >
+          {isOpen ? <X size={26} /> : <Menu size={26} />}
         </button>
       </div>
 
+      {/* Mobile Menu */}
       {isOpen && (
-        <div className="absolute top-full left-0 w-full bg-slate-950 border-t border-slate-800 p-6 flex flex-col gap-6 lg:hidden h-screen shadow-2xl animate-in slide-in-from-top-5">
-          {navLinks.map((item) => (
-            <Link
-              key={item.name}
-              href={item.href}
-              onClick={() => setIsOpen(false)}
-              className="text-lg font-bold text-white uppercase tracking-widest border-b border-slate-800 pb-4 active:text-emerald-500"
-            >
-              {item.name}
-            </Link>
-          ))}
-          <a href={`tel:${SITE_CONFIG.phone}`} className="mt-4 flex justify-center items-center gap-2 bg-emerald-600 text-white py-4 font-bold uppercase tracking-widest rounded-sm">
-            <Phone size={18} /> Call Now
-          </a>
-        </div>
+        <>
+          {/* Backdrop — tap to close */}
+          <div
+            className="fixed inset-0 bg-black/60 z-40 lg:hidden"
+            onClick={() => setIsOpen(false)}
+          />
+
+          {/* Drawer */}
+          <div className="fixed top-0 right-0 h-full w-[80vw] max-w-sm bg-slate-950 border-l border-slate-800 z-50 flex flex-col lg:hidden shadow-2xl">
+            {/* Header */}
+            <div className="flex items-center justify-between px-6 py-5 border-b border-slate-800">
+              <div className="flex items-baseline gap-1">
+                <span className="text-lg font-black text-white uppercase">Green</span>
+                <span className="text-lg font-black text-emerald-500 uppercase">Rider</span>
+              </div>
+              <button
+                onClick={() => setIsOpen(false)}
+                className="p-2 text-slate-400 hover:text-white transition-colors"
+              >
+                <X size={22} />
+              </button>
+            </div>
+
+            {/* Links */}
+            <div className="flex flex-col flex-1 overflow-y-auto px-6 py-8 gap-1">
+              {navLinks.map((item) => (
+                <Link
+                  key={item.name}
+                  href={item.href}
+                  onClick={() => setIsOpen(false)}
+                  className="text-base font-bold text-slate-300 uppercase tracking-widest py-4 border-b border-slate-800/50 active:text-emerald-400 transition-colors"
+                >
+                  {item.name}
+                </Link>
+              ))}
+            </div>
+
+            {/* Bottom CTA */}
+            <div className="p-6 border-t border-slate-800 flex flex-col gap-3">
+              <a
+                href={`tel:${SITE_CONFIG.phone.replace(/[^0-9+]/g, '')}`}
+                className="flex items-center justify-center gap-2 bg-emerald-600 text-white py-4 font-black uppercase tracking-widest rounded-sm text-sm"
+              >
+                <Phone size={16} fill="currentColor" /> Call Now
+              </a>
+              <a
+                href={`https://wa.me/${SITE_CONFIG.phone.replace(/[^0-9]/g, '')}?text=${encodeURIComponent('Namaskara, I am interested in your machines.')}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center justify-center gap-2 bg-[#25D366] text-white py-4 font-black uppercase tracking-widest rounded-sm text-sm"
+              >
+                WhatsApp Us
+              </a>
+            </div>
+          </div>
+        </>
       )}
     </nav>
   );
