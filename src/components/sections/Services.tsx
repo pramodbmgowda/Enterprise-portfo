@@ -16,10 +16,7 @@ export function Services() {
   };
 
   return (
-    <section
-      id="features"
-      className="relative py-24 md:py-32 bg-slate-950 text-white"
-    >
+    <section id="features" className="relative py-24 md:py-32 bg-slate-950 text-white">
       <div className="container mx-auto px-4 max-w-7xl">
         
         {/* Architectural Header */}
@@ -55,7 +52,7 @@ export function Services() {
           </motion.div>
         </div>
 
-        {/* The Blueprint Grid (Replacing Cards) */}
+        {/* The Blueprint Grid (Flat Class String Fixed Hydration) */}
         <div className="grid md:grid-cols-2 lg:grid-cols-4 border-t border-l border-white/10">
           {SERVICES.map((service, i) => (
             <motion.div
@@ -64,15 +61,8 @@ export function Services() {
               whileInView={{ opacity: 1 }}
               viewport={{ once: true }}
               transition={{ duration: 0.4, delay: i * 0.1 }}
-              className="
-                group relative
-                border-r border-b border-white/10
-                p-8 md:p-10
-                bg-transparent hover:bg-white/[0.02]
-                transition-colors duration-500
-              "
+              className="group relative border-r border-b border-white/10 p-8 md:p-10 bg-transparent hover:bg-white/[0.02] transition-colors duration-500"
             >
-              {/* Structural Indexing */}
               <div className="flex justify-between items-start mb-16">
                 <span className="font-mono text-[10px] text-slate-600 group-hover:text-emerald-500/50 transition-colors">
                   SEC_0{i + 1} //
@@ -82,7 +72,6 @@ export function Services() {
                 </div>
               </div>
 
-              {/* Content */}
               <h3 className="text-lg font-black uppercase tracking-widest text-white mb-4 group-hover:text-emerald-300 transition-colors">
                 {service.title}
               </h3>
@@ -91,7 +80,6 @@ export function Services() {
                 {service.desc}
               </p>
 
-              {/* Hover Line Indicator */}
               <div className="absolute bottom-0 left-0 w-0 h-[2px] bg-emerald-500 group-hover:w-full transition-all duration-700 ease-out" />
             </motion.div>
           ))}

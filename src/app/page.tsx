@@ -10,6 +10,7 @@ import { LeadCapture } from '@/components/sections/LeadCapture';
 import { Footer } from '@/components/layout/Footer';
 import { FloatingActions } from '@/components/ui/FloatingActions';
 
+
 export default function Home() {
   return (
     <main className="bg-slate-950 selection:bg-amber-500 selection:text-black">
@@ -19,6 +20,7 @@ export default function Home() {
       <OurBrand />
       <Services />
       <BentoGrid />
+
       <Owner />
       <LeadCapture />
       <Footer />
