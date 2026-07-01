@@ -28,33 +28,29 @@ export function Hero() {
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(16,185,129,.18),transparent_45%)]" />
       </div>
 
-      <div className="container mx-auto relative z-10 px-6">
+      <div className="relative z-10 mx-auto max-w-screen-2xl w-full px-6 sm:px-8 lg:px-12 xl:px-16">
         <motion.div
           initial={{ opacity: 0, y: 25 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7 }}
           className="max-w-3xl"
         >
-          {/* Small Heading */}
           <p className="uppercase tracking-[0.35em] text-emerald-400 font-semibold text-sm mb-5">
             GreenRider Equipments
           </p>
 
-          {/* Main Heading */}
           <h1 className="text-5xl md:text-6xl lg:text-7xl font-black leading-[1.05] tracking-tight text-white">
             Engineered for the
             <br />
             Hardest Soil.
           </h1>
 
-          {/* Description */}
           <p className="mt-8 text-lg md:text-xl text-slate-300 leading-8 max-w-2xl">
             Stop losing yields to cheap machinery breakdowns. We deliver
             robust agricultural equipment with a personal guarantee of zero
             tension and immediate on-ground support.
           </p>
 
-          {/* Buttons */}
           <div className="mt-12 flex flex-col sm:flex-row gap-5">
             <a
               href="#inventory"
@@ -73,7 +69,6 @@ export function Hero() {
             </a>
           </div>
 
-          {/* Stats */}
           <div className="grid grid-cols-2 gap-3 sm:gap-5 mt-12 sm:mt-16 max-w-xl">
             {STATS.slice(0, 2).map((stat, index) => (
               <motion.div
@@ -84,7 +79,6 @@ export function Hero() {
                 <h2 className="text-3xl sm:text-4xl font-black text-white">
                   {stat.value}
                 </h2>
-
                 <p className="mt-2 uppercase tracking-[0.05em] sm:tracking-[0.2em] text-[10px] sm:text-xs text-slate-400 leading-snug">
                   {stat.label}
                 </p>

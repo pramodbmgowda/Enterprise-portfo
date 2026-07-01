@@ -37,7 +37,7 @@ export function LeadCapture() {
         <div className="absolute bottom-0 right-0 w-[400px] h-[400px] bg-emerald-500/5 rounded-full blur-[120px]" />
       </div>
 
-      <div className="container mx-auto px-4">
+      <div className="mx-auto max-w-screen-2xl w-full px-6 sm:px-8 lg:px-12 xl:px-16">
 
         {/* SECTION HEADER */}
         <motion.div
@@ -128,7 +128,6 @@ export function LeadCapture() {
                 referrerPolicy="strict-origin-when-cross-origin"
                 className="absolute inset-0 w-full h-full filter grayscale contrast-125 opacity-60 group-hover:opacity-90 transition-opacity duration-500"
               />
-              {/* Scanline */}
               <div
                 className="absolute inset-0 pointer-events-none opacity-20"
                 style={{
@@ -136,13 +135,11 @@ export function LeadCapture() {
                     "repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(0,0,0,0.2) 2px, rgba(0,0,0,0.2) 4px)",
                 }}
               />
-              {/* Label */}
               <div className="absolute bottom-0 left-0 right-0 px-4 py-3 bg-gradient-to-t from-slate-950 via-slate-950/80 to-transparent pointer-events-none">
                 <p className="text-[10px] font-bold uppercase tracking-widest text-emerald-400">
                   Senthepete, Bettahalli, Hutridurga · Kunigal
                 </p>
               </div>
-              {/* Tap overlay */}
               <a
                 href="https://maps.google.com/?q=12.950889,77.115981"
                 target="_blank"

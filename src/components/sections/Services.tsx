@@ -17,7 +17,7 @@ export function Services() {
 
   return (
     <section id="features" className="relative py-24 md:py-32 bg-slate-950 text-white">
-      <div className="container mx-auto px-4 max-w-7xl">
+      <div className="mx-auto max-w-screen-2xl w-full px-6 sm:px-8 lg:px-12 xl:px-16.">
         
         {/* Architectural Header */}
         <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-8 mb-16 pb-8 border-b border-white/10">

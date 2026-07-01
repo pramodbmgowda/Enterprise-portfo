@@ -25,11 +25,11 @@ const PILLARS = [
 export function OurBrand() {
   return (
     <section className="relative py-32 bg-slate-950 text-white border-t border-white/5">
-      <div className="container mx-auto px-4 max-w-7xl">
-        
+      <div className="mx-auto max-w-screen-2xl w-full px-6 sm:px-8 lg:px-12 xl:px-16">
+
         {/* TOP SECTION: The Manifesto */}
         <div className="grid lg:grid-cols-12 gap-12 lg:gap-8 mb-24">
-          <motion.div 
+          <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
@@ -39,7 +39,7 @@ export function OurBrand() {
             <div className="flex items-center gap-4 mb-8">
               <div className="h-[1px] w-12 bg-emerald-500" />
               <span className="text-emerald-400 font-bold uppercase tracking-[0.2em] text-[10px]">
-                GREENRIDER Original's 
+                GREENRIDER Original's
               </span>
             </div>
             <h2 className="text-4xl sm:text-5xl lg:text-6xl font-black uppercase tracking-tight leading-[0.9]">
@@ -49,7 +49,7 @@ export function OurBrand() {
             </h2>
           </motion.div>
 
-          <motion.div 
+          <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
@@ -57,7 +57,7 @@ export function OurBrand() {
             className="lg:col-span-6 lg:col-start-7 flex flex-col justify-end"
           >
             <p className="text-lg md:text-xl text-slate-300 leading-relaxed font-medium mb-6">
-           We engineered our own. Built specifically for the brutal reality of Indian soil conditions, priced without corporate margins, and backed by the same workshop you walk into.
+              We engineered our own. Built specifically for the brutal reality of Indian soil conditions, priced without corporate margins, and backed by the same workshop you walk into.
             </p>
             <p className="text-sm text-slate-500 leading-relaxed max-w-lg border-l border-white/10 pl-6 mb-10">
               When {OWNER.name} gives his "personal guarantee," it is literal. Not a faceless manufacturer in another city. Him. Here.

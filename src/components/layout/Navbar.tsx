@@ -38,7 +38,7 @@ export function Navbar() {
         ? 'bg-slate-950/90 backdrop-blur-md py-3 shadow-2xl shadow-slate-950/50'
         : 'bg-transparent py-5'
     }`}>
-      <div className="container mx-auto px-4 flex justify-between items-center">
+      <div className="mx-auto max-w-screen-2xl w-full px-6 sm:px-8 lg:px-12 xl:px-16 flex justify-between items-center">
 
         {/* LOGO */}
         <Link href="/" className="group flex flex-col leading-tight">

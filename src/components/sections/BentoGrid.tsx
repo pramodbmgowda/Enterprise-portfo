@@ -11,8 +11,8 @@ export function BentoGrid() {
 
   return (
     <section id="inventory" className="relative py-24 md:py-32 bg-slate-950 border-t border-white/10">
-      <div className="container mx-auto px-4 relative z-10 max-w-7xl">
-        
+      <div className="mx-auto max-w-screen-2xl w-full px-6 sm:px-8 lg:px-12 xl:px-16 relative z-10">
+
         {/* Clean Header */}
         <div className="flex flex-col md:flex-row justify-between items-start md:items-end mb-16 pb-8 border-b border-white/10">
           <motion.div
@@ -41,7 +41,6 @@ export function BentoGrid() {
                 transition={{ duration: 0.45, ease: "easeOut", delay: reduceMotion ? 0 : i * 0.08 }}
                 className="group relative overflow-hidden bg-slate-900 border border-white/10 hover:border-emerald-500/50 transition-colors h-[380px] md:h-[440px] flex flex-col justify-end"
               >
-                {/* Background Image - Optimized */}
                 <div className="absolute inset-0 z-0">
                   <Image
                     src={cat.image}
@@ -50,28 +49,24 @@ export function BentoGrid() {
                     sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                     className="object-cover object-center opacity-50 transition-transform duration-700 md:group-hover:scale-105"
                   />
-                  {/* Clean gradient to ensure text readability */}
                   <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/50 to-transparent" />
                 </div>
 
-                {/* Top Index Label */}
                 <div className="absolute top-6 left-6 z-10">
                   <span className="font-mono text-[10px] uppercase tracking-[0.2em] text-white/50 group-hover:text-emerald-400 transition-colors">
                     CAT_0{i + 1}
                   </span>
                 </div>
 
-                {/* Content Bottom */}
                 <div className="relative z-10 p-6 md:p-8">
                   <h3 className="text-2xl font-black text-white uppercase mb-3 tracking-tight group-hover:text-emerald-400 transition-colors">
                     {cat.title}
                   </h3>
-                  
+
                   <p className="text-slate-300 text-sm leading-relaxed mb-6 line-clamp-2">
                     {cat.desc}
                   </p>
-                  
-                  {/* EXPLICIT CTA: This tells the user exactly what to do */}
+
                   <div className="inline-flex items-center gap-3 text-[11px] font-bold uppercase tracking-[0.2em] text-emerald-500 group-hover:text-white transition-colors">
                     <span>Explore Models</span>
                     <ArrowRight size={14} className="group-hover:translate-x-1 transition-transform" />
