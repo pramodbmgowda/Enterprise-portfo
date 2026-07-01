@@ -1,8 +1,6 @@
 @import "tailwindcss";
 @config "../../tailwind.config.ts";
 
-
-
 :root {
   --background: #0b0f0d;
   --foreground: #ededed;
@@ -28,6 +26,7 @@ body {
 
 * {
   -webkit-tap-highlight-color: transparent;
+  box-sizing: border-box; /* Highly recommended safety net for padding blowouts */
 }
 
 /* Improve touch targets — minimum 44px for buttons only */
@@ -36,9 +35,14 @@ button {
   min-width: 44px;
 }
 
-html {
-  scroll-behavior: smooth;
+/* THE FIX: Replaced 100vw with 100% and added absolute containment */
+html, body {
+  overflow-x: hidden;
+  max-width: 100%;
+  width: 100%;
+  position: relative; 
 }
+
 @supports (padding-bottom: env(safe-area-inset-bottom)) {
   .pb-safe {
     padding-bottom: env(safe-area-inset-bottom);
