@@ -67,10 +67,10 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
               </div>
             )}
 
-            {/* Inquire Button */}
+            {/* Inquire Button - NOW ROUTES TO CONTACT SECTION */}
             <div className="mt-8">
               <Link
-                href={`https://wa.me/919844107053?text=Inquiry%20for%20${encodeURIComponent(product.name)}`}
+                href="/#contact"
                 className="block w-full bg-brand-yellow text-slate-900 font-black uppercase tracking-widest py-4 text-center text-xs hover:bg-[#e6c800] transition-colors"
               >
                 Inquire Now

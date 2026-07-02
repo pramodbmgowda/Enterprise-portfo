@@ -32,6 +32,7 @@ export function Footer() {
               <li><Link href="/#brands" className="text-white hover:text-brand-yellow text-sm font-bold uppercase transition-colors">Our Brands</Link></li>
               <li><Link href="/#services" className="text-white hover:text-brand-yellow text-sm font-bold uppercase transition-colors">Parts & Service</Link></li>
               <li><Link href="/#contact" className="text-white hover:text-brand-yellow text-sm font-bold uppercase transition-colors">Contact Store</Link></li>
+              
             </ul>
           </div>
 
@@ -56,8 +57,13 @@ export function Footer() {
             &copy; {currentYear} GreenRider Enterprises. All rights reserved.
           </p>
           <div className="flex gap-6">
-            <span className="text-green-200 text-[10px] font-bold uppercase tracking-widest hover:text-white cursor-pointer">Privacy Policy</span>
-            <span className="text-green-200 text-[10px] font-bold uppercase tracking-widest hover:text-white cursor-pointer">Terms of Service</span>
+            {/* THE FIX: Changed spans to Links with correct routing */}
+            <Link href="/privacy" className="text-green-200 text-[10px] font-bold uppercase tracking-widest hover:text-white cursor-pointer transition-colors">
+              Privacy Policy
+            </Link>
+            <Link href="/terms" className="text-green-200 text-[10px] font-bold uppercase tracking-widest hover:text-white cursor-pointer transition-colors">
+              Terms of Service
+            </Link>
           </div>
         </div>
       </div>
