@@ -1,254 +1,84 @@
-import { CATEGORIES, PRODUCTS, SITE_CONFIG } from "@/data/inventory";
-import Link from "next/link";
+import { PRODUCTS } from "@/data/inventory";
 import { notFound } from "next/navigation";
-import {
-  Phone,
-  CheckCircle2,
-  ChevronLeft,
-  ChevronRight,
-} from "lucide-react";
+import Image from "next/image";
+import Link from "next/link";
+import { ChevronLeft } from "lucide-react";
 
-import { Navbar } from "@/components/layout/Navbar";
-import { Footer } from "@/components/layout/Footer";
-import { ProductImage } from "@/components/sections/ProductImage";
-
-export function generateStaticParams() {
-  return PRODUCTS.map((product) => ({
-    slug: product.categoryId,
-    productId: product.id,
-  }));
-}
-
-interface Props {
-  params: Promise<{
-    slug: string;
-    productId: string;
-  }>;
-}
-
-export default async function ProductPage({ params }: Props) {
+export default async function ProductPage({ params }: { params: Promise<{ slug: string; productId: string }> }) {
   const { slug, productId } = await params;
+  const product = PRODUCTS.find((p) => p.id === productId);
 
-  const product = PRODUCTS.find(
-    (p) =>
-      p.id === productId &&
-      p.categoryId === slug
-  );
-
-  if (!product) {
-    notFound();
-  }
-
-  const category = CATEGORIES.find(
-    (c) => c.id === slug
-  );
+  if (!product) notFound();
 
   return (
-    <main className="min-h-screen bg-slate-950 text-white">
+    <main className="min-h-[100svh] bg-[#f4f4f4] pt-32 pb-24">
+      <div className="mx-auto max-w-screen-xl w-full px-6">
+        
+        {/* Compact Back Link */}
+        <Link 
+          href={`/category/${slug}`} 
+          className="inline-flex items-center gap-2 text-[10px] font-black uppercase tracking-widest text-slate-500 mb-8 hover:text-brand-green transition-colors"
+        >
+          <ChevronLeft size={14} /> Back to {slug.replace("-", " ")}
+        </Link>
 
-      <Navbar />
+        {/* Industrial Split Layout (Constrained to max-w-screen-xl) */}
+        <div className="grid lg:grid-cols-2 gap-8 bg-white border border-gray-200 shadow-sm">
+          
+          {/* Image Block: Staged in Light Grey */}
+          <div className="relative aspect-[4/3] w-full bg-[#f4f4f4] flex items-center justify-center p-8 border-b lg:border-b-0 lg:border-r border-gray-100">
+            <Image
+              src={product.image}
+              alt={product.name}
+              fill
+              className="object-contain p-6"
+            />
+          </div>
 
-      <section className="relative pt-20 pb-16">
-
-        {/* Background */}
-        <div className="absolute inset-0 -z-10 overflow-hidden">
-
-          <div className="absolute inset-0 bg-slate-950" />
-
-          <div className="absolute right-0 top-0 h-80 w-80 rounded-full bg-emerald-500/10 blur-[120px]" />
-
-        </div>
-
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-
-          {/* Breadcrumb */}
-
-          <nav className="mb-5 flex flex-wrap items-center gap-2 text-sm text-slate-400">
-
-            <Link
-              href="/"
-              className="hover:text-white transition-colors"
-            >
-              Home
-            </Link>
-
-            <ChevronRight size={14} />
-
-            <Link
-              href={`/category/${slug}`}
-              className="hover:text-white transition-colors"
-            >
-              {category?.title}
-            </Link>
-
-            <ChevronRight size={14} />
-
-            <span className="text-emerald-400">
+          {/* Content Block: Tighter Typography */}
+          <div className="p-8 md:p-10 flex flex-col">
+            <h1 className="text-3xl md:text-4xl font-black uppercase tracking-tight text-slate-900 mb-6 leading-tight">
               {product.name}
-            </span>
-
-          </nav>
-
-          {/* Back */}
-
-          <Link
-            href={`/category/${slug}`}
-            className="inline-flex items-center gap-2 text-sm font-medium text-emerald-400 hover:text-emerald-300 transition-colors"
-          >
-            <ChevronLeft size={18} />
-            Back to {category?.title}
-          </Link>
-
-          {/* Product */}
-
-          <div className="mt-8 grid gap-10 lg:grid-cols-2 lg:items-start">
-
-            {/* Image */}
-
-            <div className="overflow-hidden rounded-2xl border border-white/10 bg-slate-900">
-
-              <ProductImage
-                src={product.image}
-                alt={product.name}
-              />
-
+            </h1>
+            
+            <div className="mb-8">
+              <span className="block text-[10px] font-bold uppercase tracking-widest text-slate-400 mb-1">Price</span>
+              <span className="text-2xl font-black text-brand-green">{product.price}</span>
             </div>
 
-            {/* Details */}
+            <p className="text-sm text-slate-600 leading-relaxed mb-8 font-medium max-w-lg">
+              {product.description}
+            </p>
 
-            <div>
-
-              <h1 className="text-3xl font-black leading-tight md:text-5xl">
-                {product.name}
-              </h1>
-
-              <div className="mt-5 flex flex-wrap items-center gap-4">
-
-                <p className="text-3xl font-black text-emerald-400">
-                  {product.price}
-                </p>
-
-                <div className="flex items-center gap-2 rounded-full border border-emerald-500/20 bg-emerald-500/10 px-4 py-2">
-
-                  <span className="h-2 w-2 rounded-full bg-emerald-500 animate-pulse" />
-
-                  <span className="text-xs font-semibold uppercase tracking-[0.2em] text-emerald-300">
-                    Ready for Delivery
-                  </span>
-
-                </div>
-
-              </div>
-
-              <div className="mt-8 space-y-4">
-
-                {product.specs.map((spec, index) => (
-                  <div
-                    key={index}
-                    className="flex items-start gap-3"
-                  >
-                    <CheckCircle2
-                      size={18}
-                      className="mt-1 flex-shrink-0 text-emerald-500"
-                    />
-
-                    <span className="text-slate-300">
+            {/* Specifications: Tight grid */}
+            {product.specs && (
+              <div className="border-t border-gray-100 pt-6 mt-auto">
+                <h3 className="text-[10px] font-black uppercase tracking-widest text-slate-900 mb-4">
+                  Technical Specs
+                </h3>
+                <ul className="grid sm:grid-cols-2 gap-x-4 gap-y-2 text-xs text-slate-600">
+                  {product.specs.map((spec, index) => (
+                    <li key={index} className="flex items-center gap-2">
+                      <span className="w-1 h-1 bg-brand-green"></span>
                       {spec}
-                    </span>
-                  </div>
-                ))}
-
+                    </li>
+                  ))}
+                </ul>
               </div>
-                            {/* CTA Buttons */}
-              <div className="mt-10 flex flex-col gap-4 sm:flex-row">
+            )}
 
-                <a
-                  href={`tel:${SITE_CONFIG.phone.replace(/[^0-9+]/g, "")}`}
-                  className="inline-flex flex-1 items-center justify-center gap-3 rounded-xl bg-emerald-600 px-6 py-4 text-base font-semibold text-white transition-all duration-300 hover:bg-emerald-500 hover:-translate-y-1"
-                >
-                  <Phone size={20} />
-                  Call Now
-                </a>
-
-                <Link
-                  href="/contact"
-                  className="inline-flex flex-1 items-center justify-center rounded-xl border border-white/10 bg-white/5 px-6 py-4 text-base font-semibold text-white transition-all duration-300 hover:border-emerald-500 hover:bg-white/10"
-                >
-                  Enquire Now
-                </Link>
-
-              </div>
-
-              <p className="mt-5 text-sm text-slate-400">
-                Contact us for the latest pricing, finance options,
-                government subsidy assistance, and delivery availability.
-              </p>
-
+            {/* Inquire Button */}
+            <div className="mt-8">
+              <Link
+                href={`https://wa.me/919844107053?text=Inquiry%20for%20${encodeURIComponent(product.name)}`}
+                className="block w-full bg-brand-yellow text-slate-900 font-black uppercase tracking-widest py-4 text-center text-xs hover:bg-[#e6c800] transition-colors"
+              >
+                Inquire Now
+              </Link>
             </div>
-
           </div>
-
-          {/* Divider */}
-
-          <div className="my-16 border-t border-white/10" />
-
-          {/* Similar Products */}
-
-          <div>
-
-            <h2 className="mb-8 text-2xl font-bold">
-              Similar Products
-            </h2>
-
-            <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 xl:grid-cols-4">
-
-              {PRODUCTS.filter(
-                (p) =>
-                  p.categoryId === slug &&
-                  p.id !== product.id
-              )
-                .slice(0, 4)
-                .map((item, index) => (
-                  <Link
-                    key={item.id}
-                    href={`/category/${slug}/${item.id}`}
-                    className="group overflow-hidden rounded-xl border border-white/10 bg-slate-900 transition-all duration-300 hover:-translate-y-2 hover:border-emerald-500/40"
-                  >
-
-                    <div className="relative aspect-square overflow-hidden bg-slate-950">
-
-                      <ProductImage
-                        src={item.image}
-                        alt={item.name}
-                      />
-
-                    </div>
-
-                    <div className="p-5">
-
-                      <h3 className="line-clamp-2 text-lg font-semibold transition-colors group-hover:text-emerald-400">
-                        {item.name}
-                      </h3>
-
-                      <p className="mt-3 text-xl font-bold text-emerald-400">
-                        {item.price}
-                      </p>
-
-                    </div>
-
-                  </Link>
-                ))}
-
-            </div>
-
-          </div>
-
         </div>
-
-      </section>
-
-      <Footer />
-
+      </div>
     </main>
   );
 }

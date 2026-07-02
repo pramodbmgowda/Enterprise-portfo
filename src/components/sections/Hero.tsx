@@ -1,76 +1,81 @@
 "use client";
 
-import { motion } from "framer-motion";
-import { ArrowRight, Phone } from "lucide-react";
+import { ArrowRight, MapPin } from "lucide-react";
 import Image from "next/image";
 import { SITE_CONFIG } from "@/data/inventory";
 
 export function Hero() {
   return (
-    <section
-      id="home"
-      className="relative overflow-hidden bg-slate-950 min-h-[90svh] flex items-center pt-24"
+    <section 
+      id="home" 
+      // THE FIX: min-h-[100svh] ensures it takes up 100% of the screen height. 
+      // flex-col and justify-center keep the content perfectly centered.
+      className="relative bg-white min-h-[100svh] flex flex-col justify-center pt-24 border-b-8 border-brand-yellow overflow-hidden"
     >
-      {/* Background */}
-      <div className="absolute inset-0">
-        <Image
-          src="/pexels-dave-36033665.jpg"
-          alt="Agricultural Machinery"
-          fill
-          priority
-          quality={80}
-          sizes="100vw"
-          className="object-cover object-center scale-105"
-        />
+      <div className="mx-auto max-w-screen-2xl w-full px-6 sm:px-8 lg:px-12 xl:px-16 py-12 lg:py-0">
+        
+        <div className="flex flex-col lg:flex-row items-center gap-12 lg:gap-8">
+          
+          {/* LEFT: Typography & Call to Actions */}
+          <div className="w-full lg:w-1/2 relative z-10 flex flex-col justify-center">
+            
+            <div className="inline-flex items-center gap-3 mb-8">
+              <div className="w-3 h-3 bg-brand-green"></div>
+              <p className="uppercase tracking-widest text-slate-500 font-black text-[10px]">
+                Authorized Dealership
+              </p>
+            </div>
 
-        <div className="absolute inset-0 bg-slate-950/55" />
-        <div className="absolute inset-0 bg-gradient-to-r from-slate-950 via-slate-950/70 to-transparent" />
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(16,185,129,.18),transparent_45%)]" />
-      </div>
+            <h1 className="text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-black leading-[1.05] text-slate-900 mb-8 uppercase tracking-tight">
+              Built For The <br />
+              <span className="text-brand-green">Hardest Soil.</span>
+            </h1>
 
-      <div className="relative z-10 mx-auto max-w-screen-2xl w-full px-6 sm:px-8 lg:px-12 xl:px-16">
-        <motion.div
-          initial={{ opacity: 0, y: 25 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7 }}
-          className="max-w-3xl"
-        >
-          <p className="uppercase tracking-[0.35em] text-emerald-400 font-semibold text-sm mb-5">
-            GreenRider Equipments
-          </p>
+            <p className="text-lg md:text-xl text-slate-600 leading-relaxed max-w-lg mb-10 font-medium">
+              Stop losing yields to breakdowns. We supply robust agricultural equipment backed by local service and immediate on-ground support.
+            </p>
 
-          <h1 className="text-5xl md:text-6xl lg:text-7xl font-black leading-[1.05] tracking-tight text-white">
-            Engineered for the
-            <br />
-            Hardest Soil.
-          </h1>
+            <div className="flex flex-col sm:flex-row gap-4">
+              <a
+                href="#inventory"
+                className="inline-flex items-center justify-center gap-2 bg-brand-yellow text-slate-900 px-8 py-4 font-black uppercase tracking-wide hover:bg-[#e6c800] transition-colors shadow-none"
+              >
+                View Equipment
+                <ArrowRight size={20} strokeWidth={2.5} />
+              </a>
 
-          <p className="mt-8 text-lg md:text-xl text-slate-300 leading-8 max-w-2xl">
-            Stop losing yields to cheap machinery breakdowns. We deliver
-            robust agricultural equipment with a personal guarantee of zero
-            tension and immediate on-ground support.
-          </p>
-
-          <div className="mt-12 flex flex-col sm:flex-row gap-5">
-            <a
-              href="#inventory"
-              className="inline-flex items-center justify-center gap-3 rounded-xl bg-emerald-500 px-9 py-4 font-semibold text-white shadow-lg shadow-emerald-500/30 transition-all duration-300 hover:-translate-y-1 hover:bg-emerald-400"
-            >
-              View Machinery
-              <ArrowRight size={18} />
-            </a>
-
-            <a
-              href={`tel:${SITE_CONFIG.phone.replace(/[^0-9+]/g, "")}`}
-              className="inline-flex items-center justify-center gap-3 rounded-xl border border-white/15 bg-white/10 backdrop-blur-md px-9 py-4 font-semibold text-white transition-all duration-300 hover:bg-white/20"
-            >
-              <Phone size={18} />
-              Call Sales Direct
-            </a>
+              <a
+                href="#contact"
+                className="inline-flex items-center justify-center gap-2 bg-brand-green text-white px-8 py-4 font-black uppercase tracking-wide hover:bg-green-800 transition-colors shadow-none"
+              >
+                <MapPin size={20} strokeWidth={2.5} />
+                Find Our Store
+              </a>
+            </div>
           </div>
 
-          
-        </motion.div>
+          {/* RIGHT: Industrial Staging Area for Product Image */}
+          <div className="w-full lg:w-1/2 relative mt-8 lg:mt-0">
+            {/* The Deere-style Grey Square Backdrop */}
+            <div className="absolute top-0 right-0 bottom-0 left-8 md:left-16 bg-[#f4f4f4] border-t-4 border-l-4 border-gray-200 z-0"></div>
+            
+            {/* The Green Accent Block */}
+            <div className="absolute -bottom-6 -right-6 w-32 h-32 bg-brand-green z-0 hidden md:block"></div>
+
+            {/* Product Image Stage */}
+            <div className="relative z-10 aspect-square w-full max-w-lg mx-auto flex items-center justify-center p-8">
+              <Image
+                src="/pexels-dave-36033665.jpg"
+                alt="Agricultural Machinery"
+                fill
+                priority
+                sizes="(max-width: 768px) 100vw, 50vw"
+                className="object-cover border-4 border-white shadow-xl"
+              />
+            </div>
+          </div>
+
+        </div>
       </div>
     </section>
   );

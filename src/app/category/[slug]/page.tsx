@@ -1,88 +1,57 @@
 import { CATEGORIES, PRODUCTS } from "@/data/inventory";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { PackageX } from "lucide-react";
-import { Navbar } from "@/components/layout/Navbar";
-import { Footer } from "@/components/layout/Footer";
+import { ChevronRight, PackageX } from "lucide-react";
 import { ProductCard } from "@/components/sections/ProductCard";
-import { Breadcrumb } from "@/components/ui/Breadcrumb";
 
-export function generateStaticParams() {
-  return CATEGORIES.map((category) => ({
-    slug: category.id,
-  }));
-}
-
-interface Props {
-  params: Promise<{ slug: string }>;
-}
-
-export default async function CategoryPage({ params }: Props) {
+export default async function CategoryPage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
   const category = CATEGORIES.find((c) => c.id === slug);
-
-  if (!category) {
-    notFound();
-  }
-
+  if (!category) notFound();
+  
   const products = PRODUCTS.filter((product) => product.categoryId === slug);
 
   return (
-    <main className="min-h-screen bg-slate-950 text-white">
-      <Navbar />
+    <main className="min-h-[100svh] bg-[#f4f4f4] pt-28 pb-20 flex flex-col">
+      <div className="mx-auto max-w-screen-2xl w-full px-6 sm:px-8 lg:px-12 xl:px-16 flex-1">
+        
+        {/* Breadcrumb Navigation - Kept for context */}
+        <nav className="mb-10 flex items-center gap-2 text-[10px] font-black uppercase tracking-widest text-slate-500">
+          <Link href="/" className="hover:text-brand-green transition-colors">Home</Link>
+          <ChevronRight size={14} className="text-slate-400" />
+          <Link href="/#inventory" className="hover:text-brand-green transition-colors">Equipment</Link>
+          <ChevronRight size={14} className="text-slate-400" />
+          <span className="text-brand-green uppercase">{category.title}</span>
+        </nav>
 
-      <section className="relative pt-32 pb-24">
-        <div className="mx-auto max-w-7xl px-4">
+        {/* HEADER REMOVED: The block previously here is gone, 
+           giving your cards full vertical priority. 
+        */}
 
-          <Breadcrumb
-            items={[
-              { label: "Home", href: "/" },
-              { label: "Inventory", href: "/#inventory" },
-              { label: category.title, href: "#" },
-            ]}
-          />
-
-          {/* Header Section */}
-          <div className="mb-16 border-b border-white/10 pb-8">
-            <h1 className="text-4xl md:text-6xl font-black uppercase tracking-tight mb-4">
-              {category.title}
-            </h1>
-            <p className="text-slate-400 max-w-2xl leading-relaxed">
-              {category.desc || "High-performance agricultural machinery built for operational excellence."}
-            </p>
+        {/* Product Grid */}
+        {products.length === 0 ? (
+          <div className="flex min-h-[300px] flex-col items-center justify-center border border-gray-200 bg-white p-8 text-center shadow-sm">
+            <PackageX size={48} className="mb-4 text-slate-400" strokeWidth={1.5} />
+            <h2 className="text-lg font-black uppercase tracking-widest text-slate-900">No Models Available</h2>
+            <Link
+              href="/#inventory"
+              className="mt-6 bg-brand-green text-white hover:bg-green-800 px-6 py-3 text-xs font-black uppercase tracking-widest transition-colors"
+            >
+              Back to Categories
+            </Link>
           </div>
-
-          {/* Product Grid */}
-          {products.length === 0 ? (
-            <div className="flex min-h-[400px] flex-col items-center justify-center rounded border border-white/10 bg-white/[0.02] px-6 text-center">
-              <PackageX size={48} className="mb-6 text-slate-700" strokeWidth={1} />
-              <h2 className="text-xl font-black uppercase tracking-widest">No Models Available</h2>
-              <p className="mt-3 max-w-sm text-sm text-slate-500">
-                This category is currently being updated with new technical specifications.
-              </p>
-              <Link
-                href="/#inventory"
-                className="mt-8 border border-emerald-500 text-emerald-500 hover:bg-emerald-500 hover:text-white px-8 py-3 text-[11px] font-bold uppercase tracking-[0.2em] transition-all"
-              >
-                Back to Categories
-              </Link>
-            </div>
-          ) : (
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 items-stretch">
-              {products.map((product, index) => (
-                <ProductCard
-                  key={product.id}
-                  product={product}
-                  slug={slug}
-                  index={index}
-                />
-              ))}
-            </div>
-          )}
-        </div>
-      </section>
-
-      <Footer />
+        ) : (
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 items-stretch">
+            {products.map((product) => (
+              <ProductCard
+                key={product.id}
+                product={product}
+                slug={slug}
+              />
+            ))}
+          </div>
+        )}
+      </div>
     </main>
   );
 }

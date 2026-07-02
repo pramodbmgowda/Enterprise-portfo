@@ -1,4 +1,5 @@
 "use client";
+
 import { BRANDS } from "@/data/inventory";
 import { motion } from "framer-motion";
 
@@ -6,20 +7,22 @@ export function TrustStrip() {
   return (
     <section
       id="brands"
-      className="relative z-20 scroll-mt-24 bg-slate-950 py-12 md:py-20 border-y border-white/10 overflow-hidden max-w-[100vw]"
+      className="relative z-20 scroll-mt-24 bg-[#f4f4f4] py-12 md:py-20 border-y-4 border-gray-200 overflow-hidden max-w-[100vw]"
     >
-      {/* Architectural Header */}
+      {/* Industrial Header */}
       <div className="mx-auto max-w-screen-2xl w-full px-6 sm:px-8 lg:px-12 xl:px-16 mb-10 md:mb-16">
         <div className="flex items-center gap-4 md:gap-6">
-          <div className="w-1.5 h-1.5 bg-emerald-500 flex-shrink-0" />
-          <h3 className="text-[10px] md:text-xs font-black uppercase tracking-[0.2em] text-slate-400 whitespace-nowrap">
+          {/* Heavy structural anchor instead of a glowing dot */}
+          <div className="w-3 h-3 bg-brand-green flex-shrink-0" />
+          <h3 className="text-xs md:text-sm font-black uppercase tracking-widest text-slate-800 whitespace-nowrap">
             Authorized Global Partners
           </h3>
-          <div className="flex-grow h-[1px] bg-white/5" />
+          {/* Heavy yellow divider line */}
+          <div className="flex-grow h-1 bg-brand-yellow" />
         </div>
       </div>
 
-      {/* Monolithic Marquee */}
+      {/* Monolithic Marquee - Industrial Edition */}
       <div
         className="relative flex overflow-hidden z-10 group w-full max-w-[100vw]"
         style={{ touchAction: "pan-y" }}
@@ -33,18 +36,20 @@ export function TrustStrip() {
           {[...BRANDS, ...BRANDS, ...BRANDS, ...BRANDS].map((brand, i) => (
             <span
               key={i}
-              className="text-5xl md:text-7xl lg:text-8xl font-black text-slate-800 uppercase tracking-tighter select-none flex items-center pr-12 md:pr-24 hover:text-slate-600 transition-colors duration-500"
+              className="text-5xl md:text-7xl lg:text-8xl font-black text-gray-300 uppercase tracking-tighter select-none flex items-center pr-12 md:pr-24 hover:text-brand-green transition-colors duration-300"
             >
               {brand}
-              <span className="text-emerald-500/20 text-4xl md:text-6xl font-light ml-12 md:ml-24">
-                /
+              {/* Brutalist structural separators */}
+              <span className="text-gray-200 text-4xl md:text-6xl font-black ml-12 md:ml-24">
+                //
               </span>
             </span>
           ))}
         </motion.div>
 
-        <div className="absolute top-0 left-0 w-24 md:w-64 h-full bg-gradient-to-r from-slate-950 to-transparent z-20 pointer-events-none" />
-        <div className="absolute top-0 right-0 w-24 md:w-64 h-full bg-gradient-to-l from-slate-950 to-transparent z-20 pointer-events-none" />
+        {/* Industrial Edge Masks (Matches the #f4f4f4 background) */}
+        <div className="absolute top-0 left-0 w-24 md:w-64 h-full bg-gradient-to-r from-[#f4f4f4] to-transparent z-20 pointer-events-none" />
+        <div className="absolute top-0 right-0 w-24 md:w-64 h-full bg-gradient-to-l from-[#f4f4f4] to-transparent z-20 pointer-events-none" />
       </div>
     </section>
   );

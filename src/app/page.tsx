@@ -8,17 +8,18 @@ import { BentoGrid } from '@/components/sections/BentoGrid';
 import { Owner } from '@/components/sections/Owner';
 import { LeadCapture } from '@/components/sections/LeadCapture';
 import { FloatingActions } from '@/components/ui/FloatingActions';
+import { FAQ } from '@/components/sections/FAQ';
 
 export default function Home() {
   return (
     <main className="bg-slate-950 selection:bg-amber-500 selection:text-black">
       <Navbar />
       <Hero />
-      <TrustStrip />
       <OurBrand />
+      <TrustStrip />
       <Services />
       <BentoGrid />
-      <Owner />
+      <FAQ /> 
       <LeadCapture />
       <FloatingActions />
     </main>

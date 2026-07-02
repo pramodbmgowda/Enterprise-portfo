@@ -1,48 +1,64 @@
+import Link from "next/link";
 import { SITE_CONFIG } from "@/data/inventory";
 
 export function Footer() {
+  const currentYear = new Date().getFullYear();
+
   return (
-    <footer className="bg-slate-950 border-t border-white/10 pt-16 pb-8">
-      <div className="container mx-auto px-4 max-w-7xl">
-        <div className="grid md:grid-cols-4 gap-12 mb-16">
-          {/* Brand Info */}
-       <div className="col-span-2 md:col-span-1">
-  <h4 className="font-black text-xl mb-4">
-    <span className="text-white">GREEN</span>
-    <span className="text-emerald-500">RIDER</span>
-  </h4>
-  <p className="text-slate-500 text-xs leading-relaxed">
-    Authorized OEM Dealer & Service Center for agricultural automation.
-  </p>
-</div>
+    <footer className="bg-brand-green text-white border-t-8 border-brand-yellow">
+      <div className="mx-auto max-w-screen-2xl px-6 sm:px-8 lg:px-12 xl:px-16 py-16">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
           
-          {/* Legal/Links */}
+          {/* Brand Col */}
           <div>
-            <h5 className="text-white font-bold text-xs uppercase tracking-widest mb-4">Company</h5>
-            <ul className="space-y-3 text-slate-500 text-xs">
-              <li><a href="/privacy" className="hover:text-emerald-500">Privacy Policy</a></li>
-              <li><a href="/terms" className="hover:text-emerald-500">Terms of Service</a></li>
-            </ul>
-          </div>
-          
-          {/* Contact */}
-          <div>
-            <h5 className="text-white font-bold text-xs uppercase tracking-widest mb-4">HQ</h5>
-            <p className="text-slate-500 text-xs leading-relaxed">{SITE_CONFIG.address}</p>
+            <Link href="/" className="flex flex-col mb-6 inline-block">
+              <span className="text-3xl font-black uppercase tracking-widest text-white leading-none">
+                GreenRider
+              </span>
+              <span className="text-[10px] font-bold uppercase tracking-widest text-brand-yellow mt-1">
+                Enterprises
+              </span>
+            </Link>
+            <p className="text-green-100 text-sm leading-relaxed max-w-sm">
+              Authorized dealership for premium agricultural and dairy machinery. Reliable performance for the toughest terrain.
+            </p>
           </div>
 
-          {/* Compliance Badge */}
-          <div className="bg-white/5 p-4 rounded border border-white/10">
-            <p className="text-[10px] text-slate-400 uppercase tracking-widest mb-1">GST Registration</p>
-            <p className="text-white font-mono text-sm">29AAAAA0000A1Z5</p>
-            <p className="text-[9px] text-slate-600 mt-2">Verified Business Entity</p>
+          {/* Quick Links */}
+          <div>
+            <h4 className="text-brand-yellow font-black uppercase tracking-widest mb-6">Explore</h4>
+            <ul className="space-y-4">
+              <li><Link href="/#inventory" className="text-white hover:text-brand-yellow text-sm font-bold uppercase transition-colors">Equipment</Link></li>
+              <li><Link href="/#brands" className="text-white hover:text-brand-yellow text-sm font-bold uppercase transition-colors">Our Brands</Link></li>
+              <li><Link href="/#services" className="text-white hover:text-brand-yellow text-sm font-bold uppercase transition-colors">Parts & Service</Link></li>
+              <li><Link href="/#contact" className="text-white hover:text-brand-yellow text-sm font-bold uppercase transition-colors">Contact Store</Link></li>
+            </ul>
+          </div>
+
+          {/* Contact Col */}
+          <div>
+            <h4 className="text-brand-yellow font-black uppercase tracking-widest mb-6">Contact Us</h4>
+            <ul className="space-y-4">
+              <li className="text-sm text-green-100">
+                <span className="block font-bold text-white uppercase text-[10px] tracking-widest mb-1">Phone</span>
+                {SITE_CONFIG.phone}
+              </li>
+              <li className="text-sm text-green-100">
+                <span className="block font-bold text-white uppercase text-[10px] tracking-widest mb-1">Address</span>
+                {SITE_CONFIG.address}
+              </li>
+            </ul>
           </div>
         </div>
 
-        {/* Copyright */}
-        <div className="border-t border-white/10 pt-8 flex flex-col md:flex-row justify-between gap-4 text-[10px] text-slate-600 uppercase tracking-widest">
-          <p>© 2026 GreenRider Industries. All Rights Reserved.</p>
-          <p>AUTHORIZED DEALER · KARNATAKA, INDIA</p>
+        <div className="border-t border-green-800 mt-16 pt-8 flex flex-col md:flex-row items-center justify-between gap-4">
+          <p className="text-green-200 text-xs font-bold tracking-widest uppercase">
+            &copy; {currentYear} GreenRider Enterprises. All rights reserved.
+          </p>
+          <div className="flex gap-6">
+            <span className="text-green-200 text-[10px] font-bold uppercase tracking-widest hover:text-white cursor-pointer">Privacy Policy</span>
+            <span className="text-green-200 text-[10px] font-bold uppercase tracking-widest hover:text-white cursor-pointer">Terms of Service</span>
+          </div>
         </div>
       </div>
     </footer>
