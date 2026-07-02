@@ -44,6 +44,7 @@ export type Product = {
   image: string;
   price: string;
   description: string;
+  specs?: string[];
 };
 
 export const PRODUCTS: Product[] = [
@@ -54,6 +55,14 @@ export const PRODUCTS: Product[] = [
     image: "/products/gr-weeder.jpeg",
     price: "₹38,000",
     description: "Designed for Indian soil and backed directly by us. If anything goes wrong, you call us — not a distant manufacturer.",
+    specs: [
+      "4-Stroke Petrol Engine",
+      "5.5 HP Output",
+      "Tilling Width: 600mm",
+      "Air-Cooled Engine",
+      "Manual Recoil Start",
+      "Weight: 68 kg",
+    ],
   },
   {
     id: "fj500",
@@ -62,6 +71,14 @@ export const PRODUCTS: Product[] = [
     image: "/products/fj500.jpeg",
     price: "₹45,000",
     description: "Genuine Honda machinery sold by an authorized dealer. Full manufacturer warranty, original spare parts.",
+    specs: [
+      "Honda GX160 Petrol Engine",
+      "5.5 HP Output",
+      "Tilling Width: 500mm",
+      "Air-Cooled 4-Stroke Engine",
+      "Manual Recoil Start",
+      "1-Year Manufacturer Warranty",
+    ],
   },
   {
     id: "gr-bc40",
@@ -70,6 +87,13 @@ export const PRODUCTS: Product[] = [
     image: "/products/gr-brushcutter.jpeg",
     price: "₹14,500",
     description: "Built for everyday Indian farm use. Cost-effective, durable, and fully serviced at our workshop.",
+    specs: [
+      "2-Stroke Petrol Engine",
+      "40.2 cc Displacement",
+      "Dual-Handle Design",
+      "3-Tooth Metal Blade Included",
+      "Weight: 7.8 kg",
+    ],
   },
   {
     id: "stihl-fs220",
@@ -78,6 +102,14 @@ export const PRODUCTS: Product[] = [
     image: "/products/fs220.jpeg",
     price: "₹22,500",
     description: "German-engineered precision for demanding brush and grass cutting. Full manufacturer warranty.",
+    specs: [
+      "2-Stroke Petrol Engine",
+      "27.2 cc Displacement",
+      "Anti-Vibration System",
+      "Nylon Line & Metal Blade Compatible",
+      "Weight: 7.2 kg",
+      "1-Year Manufacturer Warranty",
+    ],
   },
   {
     id: "milker-01",
@@ -86,6 +118,13 @@ export const PRODUCTS: Product[] = [
     image: "/products/milking-machine.jpeg",
     price: "₹38,000",
     description: "Direct-from-dealer pricing with full local service support. No middleman, no inflated costs.",
+    specs: [
+      "Single Bucket, 25L Capacity",
+      "Vacuum Pump: 180 L/min",
+      "Stainless Steel Bucket",
+      "Single-Phase Motor",
+      "Suitable for 4-8 Cows/Day",
+    ],
   },
   {
     id: "chiller-200l",
@@ -94,5 +133,12 @@ export const PRODUCTS: Product[] = [
     image: "/products/milk-chiller.jpeg",
     price: "₹1,85,000",
     description: "Ideal for individual farmers and small dairy cooperatives scaling up milk production.",
+    specs: [
+      "Storage Capacity: 200 Litres",
+      "Rapid Cooling: 35°C to 4°C in <3 hrs",
+      "Stainless Steel Tank (SS 304)",
+      "Automatic Agitator",
+      "Digital Temperature Display",
+    ],
   },
 ];
