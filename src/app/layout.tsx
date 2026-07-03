@@ -1,3 +1,4 @@
+import { Analytics } from "@vercel/analytics/react";
 import type { Metadata } from "next";
 import { SITE_CONFIG } from "@/data/inventory";
 import "./globals.css";
@@ -77,6 +78,7 @@ export default function RootLayout({
       <body className="antialiased">
         {/* If you are importing your Navbar or Footer here globally, they go above/below {children} */}
         {children}
+        <Analytics />
       </body>
     </html>
   );
