@@ -1,31 +1,29 @@
 import { MetadataRoute } from 'next';
-import { CATEGORIES, PRODUCTS } from '@/data/inventory';
+import { CATEGORIES } from '@/data/inventory';
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const base = 'https://greenrider.in';
+  const base = 'https://greenriderskb.com';
 
-  const categoryPages = CATEGORIES.map((cat) => ({
-    url: `${base}/category/${cat.id}`,
-    lastModified: new Date(),
-    changeFrequency: 'weekly' as const,
-    priority: 0.8,
-  }));
-
-  const productPages = PRODUCTS.map((p) => ({
-    url: `${base}/category/${p.categoryId}/${p.id}`,
-    lastModified: new Date(),
-    changeFrequency: 'weekly' as const,
-    priority: 0.7,
-  }));
-
-  return [
+  // 1. Core Static Pages
+  const staticRoutes: MetadataRoute.Sitemap = [
     {
-      url: base,
+      url: `${base}`,
       lastModified: new Date(),
       changeFrequency: 'weekly',
       priority: 1,
     },
-    ...categoryPages,
-    ...productPages,
   ];
+
+  // 2. Category Pages (e.g., /category/weeders)
+  const categoryRoutes: MetadataRoute.Sitemap = CATEGORIES.map((category) => ({
+    url: `${base}/category/${category.id}`,
+    lastModified: new Date(),
+    changeFrequency: 'weekly',
+    priority: 0.8,
+  }));
+
+  // We no longer generate individual product URLs because the 
+  // product details are now displayed directly on the category cards!
+
+  return [...staticRoutes, ...categoryRoutes];
 }
