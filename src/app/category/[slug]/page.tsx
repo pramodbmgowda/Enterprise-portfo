@@ -1,4 +1,5 @@
-import { CATEGORIES, PRODUCTS } from "@/data/inventory";
+import { CATEGORIES } from "@/data/inventory";
+import { GREENRIDER_INVENTORY } from "@/data/inventoryData";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { ChevronRight, PackageX } from "lucide-react";
@@ -6,16 +7,19 @@ import { ProductCard } from "@/components/sections/ProductCard";
 
 export default async function CategoryPage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
+  
+  // Find category from config file
   const category = CATEGORIES.find((c) => c.id === slug);
   if (!category) notFound();
   
-  const products = PRODUCTS.filter((product) => product.categoryId === slug);
+  // Filter products from the master inventory database
+  const products = GREENRIDER_INVENTORY.filter((product) => product.categoryId === slug);
 
   return (
     <main className="min-h-[100svh] bg-[#f4f4f4] pt-28 pb-20 flex flex-col">
       <div className="mx-auto max-w-screen-2xl w-full px-6 sm:px-8 lg:px-12 xl:px-16 flex-1">
         
-        {/* Breadcrumb Navigation - Kept for context */}
+        {/* Breadcrumb Navigation */}
         <nav className="mb-10 flex items-center gap-2 text-[10px] font-black uppercase tracking-widest text-slate-500">
           <Link href="/" className="hover:text-brand-green transition-colors">Home</Link>
           <ChevronRight size={14} className="text-slate-400" />
@@ -23,10 +27,6 @@ export default async function CategoryPage({ params }: { params: Promise<{ slug:
           <ChevronRight size={14} className="text-slate-400" />
           <span className="text-brand-green uppercase">{category.title}</span>
         </nav>
-
-        {/* HEADER REMOVED: The block previously here is gone, 
-           giving your cards full vertical priority. 
-        */}
 
         {/* Product Grid */}
         {products.length === 0 ? (

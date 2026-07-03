@@ -17,8 +17,8 @@ export function Navbar() {
   const navLinks = [
     { label: "Home", href: "/" },
     { label: "Equipment", href: "/#inventory" },
+    { label: "About Us", href: "/#ourbrand" },
     { label: "Parts & Service", href: "/#services" },
-    { label: "Contact Us", href: "/#contact" },
     { label: "FAQ", href: "/#faq"},
   ];
 
@@ -44,7 +44,7 @@ export function Navbar() {
             </Link>
           ))}
           <Link href="#contact" className="ml-4 bg-brand-yellow text-slate-900 px-6 py-3 text-sm font-black uppercase tracking-wide hover:bg-yellow-400 transition-colors shadow-sm">
-            Request Quote
+            Contact Store
           </Link>
         </nav>
 
@@ -69,6 +69,9 @@ export function Navbar() {
               {link.label}
             </Link>
           ))}
+          <Link href="#contact" onClick={() => setIsOpen(false)} className="text-2xl font-bold text-slate-900 border-b border-gray-100 pb-4">
+            Contact Store
+          </Link>
         </nav>
 
         <div className="absolute bottom-0 left-0 w-full p-4 flex gap-4 bg-brand-gray pb-safe">

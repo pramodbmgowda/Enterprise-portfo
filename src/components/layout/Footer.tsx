@@ -7,7 +7,7 @@ export function Footer() {
   return (
     <footer className="bg-brand-green text-white border-t-8 border-brand-yellow">
       <div className="mx-auto max-w-screen-2xl px-6 sm:px-8 lg:px-12 xl:px-16 py-16">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-12 lg:gap-16">
           
           {/* Brand Col */}
           <div>
@@ -32,18 +32,33 @@ export function Footer() {
               <li><Link href="/#brands" className="text-white hover:text-brand-yellow text-sm font-bold uppercase transition-colors">Our Brands</Link></li>
               <li><Link href="/#services" className="text-white hover:text-brand-yellow text-sm font-bold uppercase transition-colors">Parts & Service</Link></li>
               <li><Link href="/#contact" className="text-white hover:text-brand-yellow text-sm font-bold uppercase transition-colors">Contact Store</Link></li>
-              
             </ul>
           </div>
 
           {/* Contact Col */}
           <div>
             <h4 className="text-brand-yellow font-black uppercase tracking-widest mb-6">Contact Us</h4>
-            <ul className="space-y-4">
+            <ul className="space-y-5">
               <li className="text-sm text-green-100">
                 <span className="block font-bold text-white uppercase text-[10px] tracking-widest mb-1">Phone</span>
                 {SITE_CONFIG.phone}
               </li>
+              
+              {/* Added Email */}
+              <li className="text-sm text-green-100">
+                <span className="block font-bold text-white uppercase text-[10px] tracking-widest mb-1">Email</span>
+                <a href="mailto:sales@greenrider.in" className="hover:text-brand-yellow transition-colors">
+                  info@greenriderskb.in
+                </a>
+              </li>
+
+              {/* Added Operating Hours */}
+              <li className="text-sm text-green-100">
+                <span className="block font-bold text-white uppercase text-[10px] tracking-widest mb-1">Operating Hours</span>
+                Monday - Sunday <br />
+                <span className="font-bold">9:30 AM - 6:00 PM</span>
+              </li>
+
               <li className="text-sm text-green-100">
                 <span className="block font-bold text-white uppercase text-[10px] tracking-widest mb-1">Address</span>
                 {SITE_CONFIG.address}
@@ -57,7 +72,6 @@ export function Footer() {
             &copy; {currentYear} GreenRider Enterprises. All rights reserved.
           </p>
           <div className="flex gap-6">
-            {/* THE FIX: Changed spans to Links with correct routing */}
             <Link href="/privacy" className="text-green-200 text-[10px] font-bold uppercase tracking-widest hover:text-white cursor-pointer transition-colors">
               Privacy Policy
             </Link>

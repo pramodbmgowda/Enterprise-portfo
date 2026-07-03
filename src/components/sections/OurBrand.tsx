@@ -3,10 +3,38 @@
 import { ShieldCheck, Wrench, Truck, ArrowRight } from "lucide-react";
 import Link from "next/link";
 import Image from "next/image";
+import { useEffect, useRef, useState } from "react";
 
 export function OurBrand() {
+  const [statsVisible, setStatsVisible] = useState(false);
+  const statsRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setStatsVisible(true);
+          observer.disconnect(); // Only animate once
+        }
+      },
+      { threshold: 0.1 } // Triggers when 10% of the element is visible
+    );
+
+    if (statsRef.current) {
+      observer.observe(statsRef.current);
+    }
+
+    return () => observer.disconnect();
+  }, []);
+
+  const stats = [
+    { value: "5000+", label: "Machines Sold" },
+    { value: "20+", label: "Years Experience" },
+    { value: "5+", label: "Trained Professionals" },
+  ];
+
   return (
-    <section className="py-16 lg:py-24 bg-white">
+    <section id="ourbrand" className="py-16 lg:py-24 bg-white">
       <div className="mx-auto max-w-screen-2xl px-6 sm:px-8 lg:px-12 xl:px-16">
         
         {/* Section Header */}
@@ -16,8 +44,31 @@ export function OurBrand() {
           </h2>
           <div className="h-1 w-16 md:w-24 bg-brand-yellow mb-6"></div>
           <p className="text-slate-600 max-w-2xl text-base md:text-lg font-medium">
-            Engineered for maximum uptime. We don't just sell machinery; we partner with you to ensure your operations never stop.
+            We don't just sell machinery; we partner with you to ensure your operations never stop.
           </p>
+        </div>
+
+        {/* ANIMATED STATS ROW */}
+        <div 
+          ref={statsRef}
+          className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-10 lg:mb-12"
+        >
+          {stats.map((stat, index) => (
+            <div 
+              key={index}
+              className={`bg-brand-green text-white p-6 md:p-8 flex flex-col justify-center border-l-4 border-brand-yellow shadow-sm transition-all duration-1000 ease-out transform ${
+                statsVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-12"
+              }`}
+              style={{ transitionDelay: `${index * 200}ms` }}
+            >
+              <span className="text-4xl md:text-5xl font-black uppercase tracking-tight mb-2">
+                {stat.value}
+              </span>
+              <span className="text-green-100 text-xs md:text-sm font-bold uppercase tracking-widest">
+                {stat.label}
+              </span>
+            </div>
+          ))}
         </div>
 
         {/* Industrial Grid Layout */}
@@ -32,7 +83,6 @@ export function OurBrand() {
               </span>
             </div>
             
-            {/* THE FIX: Controlled responsive heights for mobile, tablet, and desktop */}
             <div className="relative h-56 sm:h-64 lg:h-80 w-full bg-gray-200 border-b border-gray-200">
               <Image 
                 src="/agro5.jpg" 
@@ -41,11 +91,9 @@ export function OurBrand() {
                 sizes="(max-width: 1024px) 100vw, 66vw"
                 className="object-cover object-center grayscale group-hover:grayscale-0 transition-all duration-500"
               />
-              {/* Added a subtle gradient to ensure the image blends cleanly */}
               <div className="absolute inset-0 bg-gradient-to-t from-[#f4f4f4]/40 via-transparent to-transparent" />
             </div>
 
-            {/* Tighter padding on mobile (p-6) */}
             <div className="flex flex-col flex-1 p-6 md:p-8 lg:p-10 bg-white">
               <ShieldCheck size={28} className="text-brand-green mb-4 md:w-8 md:h-8" strokeWidth={2} />
               <h3 className="text-2xl md:text-3xl font-black text-slate-900 mb-3 md:mb-4 uppercase tracking-tight">
