@@ -9,8 +9,6 @@ import { Owner } from '@/components/sections/Owner';
 import { LeadCapture } from '@/components/sections/LeadCapture';
 import { FloatingActions } from '@/components/ui/FloatingActions';
 import { FAQ } from '@/components/sections/FAQ';
-import { AboutUs } from '@/components/sections/AboutUs';
-import { Contact } from '@/components/sections/Contact';
 
 export default function Home() {
   return (
