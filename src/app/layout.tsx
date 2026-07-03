@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import { SITE_CONFIG } from "@/data/inventory";
+import "./globals.css";
 
+// 1. YOUR CUSTOMIZED SEO METADATA
 export const metadata: Metadata = {
   title: {
     default: `${SITE_CONFIG.name} | Agricultural Machinery`,
@@ -63,3 +65,19 @@ export const metadata: Metadata = {
     },
   },
 };
+
+// 2. THE REQUIRED REACT LAYOUT COMPONENT
+export default function RootLayout({
+  children,
+}: Readonly<{
+  children: React.ReactNode;
+}>) {
+  return (
+    <html lang="en">
+      <body className="antialiased">
+        {/* If you are importing your Navbar or Footer here globally, they go above/below {children} */}
+        {children}
+      </body>
+    </html>
+  );
+}
