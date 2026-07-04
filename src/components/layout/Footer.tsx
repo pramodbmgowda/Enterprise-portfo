@@ -7,7 +7,8 @@ export function Footer() {
   return (
     <footer className="bg-brand-green text-white border-t-8 border-brand-yellow">
       <div className="mx-auto max-w-screen-2xl px-6 sm:px-8 lg:px-12 xl:px-16 py-16">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-12 lg:gap-16">
+        {/* Expanded to a 4-column grid for clean, Swiss-style structural balance */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-12 lg:gap-16">
           
           {/* Brand Col */}
           <div>
@@ -20,7 +21,7 @@ export function Footer() {
               </span>
             </Link>
             <p className="text-green-100 text-sm leading-relaxed max-w-sm">
-              Authorized dealership for premium agricultural and dairy machinery. Reliable performance for the toughest terrain.
+              Authorized dealership for agricultural and dairy machinery. Reliable performance for the toughest terrain.
             </p>
           </div>
 
@@ -44,19 +45,17 @@ export function Footer() {
                 {SITE_CONFIG.phone}
               </li>
               
-              {/* Added Email */}
               <li className="text-sm text-green-100">
                 <span className="block font-bold text-white uppercase text-[10px] tracking-widest mb-1">Email</span>
-                <a href="mailto:sales@greenrider.in" className="hover:text-brand-yellow transition-colors">
+                <a href="mailto:info@greenriderskb.in" className="hover:text-brand-yellow transition-colors">
                   info@greenriderskb.in
                 </a>
               </li>
 
-              {/* Added Operating Hours */}
               <li className="text-sm text-green-100">
                 <span className="block font-bold text-white uppercase text-[10px] tracking-widest mb-1">Operating Hours</span>
                 Monday - Sunday <br />
-                <span className="font-bold">9:30 AM - 6:00 PM</span>
+                <span className="font-bold text-white">9:30 AM - 6:00 PM</span>
               </li>
 
               <li className="text-sm text-green-100">
@@ -65,10 +64,25 @@ export function Footer() {
               </li>
             </ul>
           </div>
+
+          {/* SEO & Service Areas Col (NEW) */}
+          <div>
+            <h4 className="text-brand-yellow font-black uppercase tracking-widest mb-6">Service Areas</h4>
+            <div className="space-y-4">
+              <p className="text-green-100 text-sm leading-relaxed">
+                Supplying premium <strong className="text-white font-bold">tillers</strong>, <strong className="text-white font-bold">milking equipments</strong>, and <strong className="text-white font-bold">small-scale agriculture equipments</strong> to local farmers and agribusinesses.
+              </p>
+              <p className="text-green-100 text-sm leading-relaxed">
+                Providing reliable machinery <strong className="text-white font-bold">services</strong> and expert technical <strong className="text-white font-bold">help</strong> across <span className="text-white font-semibold">Sentheepete</span>, <span className="text-white font-semibold">Kunigal</span>, <span className="text-white font-semibold">Hutridurga</span>, <span className="text-white font-semibold">Bettahalli</span>, and surrounding regions.
+              </p>
+            </div>
+          </div>
+          
         </div>
 
+        {/* Bottom Copyright & Legal */}
         <div className="border-t border-green-800 mt-16 pt-8 flex flex-col md:flex-row items-center justify-between gap-4">
-          <p className="text-green-200 text-xs font-bold tracking-widest uppercase">
+          <p className="text-green-200 text-xs font-bold tracking-widest uppercase text-center md:text-left">
             &copy; {currentYear} GreenRider Enterprises. All rights reserved.
           </p>
           <div className="flex gap-6">

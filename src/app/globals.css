@@ -21,9 +21,10 @@
 }
 
 /* 1. HTML handles the scrolling mechanics ONLY */
+/* 1. HTML handles the scrolling mechanics ONLY */
 html {
   scroll-behavior: smooth;
-  scroll-padding-top: 80px; 
+  scroll-padding-top: 120px; /* This forces anchor links to stop below your Navbar */
 }
 
 /* 2. BODY handles the layout boundaries */
